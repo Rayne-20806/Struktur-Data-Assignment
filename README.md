@@ -1,7 +1,7 @@
 ## Repository praktikum algoritma dan struktur data
 
 <pre>
-Nama : Arvinanto Bahtiar
-NIM : 2211110014
-Kelas : S1SD03-A
+Nama : RYAN MUHAMAD SAPUTRA
+NIM : 103112400109
+Kelas : S1IF12-04
 </pre>
