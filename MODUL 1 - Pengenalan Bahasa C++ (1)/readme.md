@@ -214,8 +214,9 @@ int main() {
 #### Output:
 <img width="307" height="156" alt="image" src="https://github.com/user-attachments/assets/4d8e3fe1-3c24-43e2-81e3-986c27925a8e" />
 
+Program di atas berfungsi sebagai menerima input dua buah bilangan float yang kemudian kedua buah bilangan itu akan di eksekusi dalam operasi aritmatika yaitu penjumlahan, pengurangan, perkalian, pembagian.
 
-Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
+Program ini memiliki dua variabel bertipe float yaitu ```bilangan1 dan bilangan2```, untuk input output gunakan <code>cin >> dan cout << </code>, setelah pengguna menginputkan nilai variabel yang float, maka program akan mengeksekusi jenis-jenis operasii aritmatika dan menampilkan hasilnya.
 
 #### Full code Screenshot:
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/f56b2ba2-1452-42b4-9f2f-0e8d27d3033c" />
@@ -283,7 +284,10 @@ int main() {
 #### Output:
 <img width="1027" height="99" alt="image" src="https://github.com/user-attachments/assets/3e7492c8-5eb4-4122-8c99-74f76e72770c" />
 
-penjelasan
+Program ini dibuat untuk menerima masukkan angka dan mengeluarkan sebuah outpu nilai dari angka tersebut namun sudah diubah kedalam kalimat atau tulisan. Angka yang diinput memiliki syarat yaitu bilangan bulat positif mulai dari 0 s.d 100, tidak boleh kurang(negatif) atau lebih(>100).
+
+Selanjutnya, program ini menyuruh user untuk menginputkan suatu```bilangan``` dari 0-100 dan program akan mengecek pada ```if (bilangan >= 0 && bilangan <= 100)``` apakah inputan user sesuai dengan syarat atau tidak, jika if terpenuhi maka akan masuk dan mulai melakukan proses untuk menerjemahkan suat angka menuju ke kalimat yang dimana ada banya if dan else if juga.. Namun jika iputan ```kurang dari 0 dan lebih dari 100``` maka akan menghasilkan ```"Inputan anda tidak valid"```.
+Program ini juga memiliki function satuan yang digunakan untuk menerjemahkan digit belakang atau satuan.
 
 #### Full code screenshot:
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/d6b3da10-ea13-402a-b15b-7a6d31dda052" />
@@ -336,7 +340,14 @@ int main() {
 <img width="864" height="174" alt="image" src="https://github.com/user-attachments/assets/dd06e9ff-70a5-494e-b732-907fe40d42e3" />
 
 
-penjelasan
+Program ini dibuat untuk membuat sebuah pola segitiga atau piramida yang terbalik(betuk simetris) berdasarkan angka yang diinput oleh user. 
+Logika program ini ada di dalam looping ``` for (int i = angka; i >= 1; i-- )``` dan di dalamnya juga terdapat loop atau yang disebut dengan nested loops(looping bersarang). Karena ini segitiga terbalik, maka loop terluar mengatur setiap baris yang dimana berjalan menurun dari angka input pengguna hingga 1.
+ada 3 loop yang berfungsi sebagai berikut
+<ol>Loop pertama digunakan untuk mencetak spasi yang nantinya digunakan untuk menciptakan bentuk segitiga, iterasi pertama tidak akan mencetak spasi namun iterasi selanjutnya dan seterusnya akan mencetak spasi agar membentuk segitiga ke bawah</ol>
+<ol>Loop kedua digunakan untuk mencetak angka dari besar ke kecil atau descendig</ol>
+<ol>Kemudian ada bintang di tengah ketika loop kedua sudah selesai maka akan mencetak bintang</ol>
+<ol>Loop ketiga digunakaa untuk mencetak angka dari kecil ke besar atau ascending, sehingga loop kedua dan ketiga menciptakan efek kebalikan atau mirror atau cermin</ol>
+Kemudian loop paling bawah sendiri digunakan untuk mencetak spasi dan satu bintang paling bawah agar membentuk puncak terbalik dari suatu segitiga.
 
 #### Full code screenshot:
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/36d5d19e-3554-4e3c-9dc8-4041bc406559" />
