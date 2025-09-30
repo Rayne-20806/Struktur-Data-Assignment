@@ -358,6 +358,7 @@ Kemudian loop paling bawah sendiri digunakan untuk mencetak spasi dan satu binta
 
 ## Kesimpulan
 Ringkasan dan interpretasi pandangan kalia dari hasil praktikum dan pembelajaran yang didapat[1].
+Setelah praktikum pertama dilaksanakan, saya dapat menyimpulkan bahwa praktikum ini telah membuat saya memahami dan mampu mengimplementasikan konsep-konsep basic dasar di C++ seperti deklarasi variabel, tipe data, konstanta, for loop, do-while, dan juga struktur. Selain itu juga bagaimana cara mengimport library di c++, cara running code, belajar syntax c++, menurut saya mengganti bahasa pemrograman tidak masalah karena pada dasarnya yang terpenting adalah memahami algoritma pemrograman dan juga cara kerjanya serta yang membedakan hanya syntax code nya saja, selebihnya algoritmanya menurut saya sama dan tidak ada bedanya
 
 ## Referensi
 [1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
