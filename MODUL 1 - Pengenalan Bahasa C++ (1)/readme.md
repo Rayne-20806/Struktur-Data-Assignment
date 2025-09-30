@@ -21,7 +21,7 @@ int main() {
 ```
 kode di atas digunakan untuk menampilkan output yaitu ```"Hello world```.
 
-## 2. INPUT OUTOUT
+## 2. INPUT OUTPUT
 ```c++
 #include <iostream>
 using namespace std;
@@ -166,24 +166,166 @@ Program di atas mengimplementasikan sebuah ```struct``` atau struktur, yaitu tip
 
 ## Unguided 
 
-### 1. [Soal]
+### 1. OPERATOR C++
+<img width="600" alt="Soal nomor 1" src="https://github.com/user-attachments/assets/698348a3-2bb3-45c6-812a-714d13ab50f8" />
+
 
 ```C++
 #include <iostream>
 using namespace std;
 
 int main() {
-    cout << "ini adalah file code unguided praktikan" << endl;
-    return 0;
+     float bilangan1;
+     float bilangan2;
+
+     cout << " || Program input dua bil float ||" << endl;
+     cout << "Masukkan bilangan 1: ";
+     cin >> bilangan1;
+     cout << "Masukkan bilangan 2: ";
+     cin >> bilangan2;
+
+     cout << endl;
+     cout << " || Hasil/output dari operasi dua bil ||"<< endl;
+     cout << "Pertambahan: " << bilangan1 << " + " << bilangan2 << " = " << (bilangan1 + bilangan2) << endl;
+     cout << "Pengurangan: " << bilangan1 << " - " << bilangan2 << " = " << (bilangan1 - bilangan2) << endl;
+     cout << "Perkalian:  " << bilangan1 << " * " << bilangan2 << " = " << (bilangan1 * bilangan2) << endl;
+     cout << "Pembagian:   " << bilangan1 << " / " << bilangan2 << " = " << (bilangan1 / bilangan2) << endl;
+
+     return 0;
 }
 ```
 #### Output:
-![240302_00h00m06s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/6d1727a8-fb77-4ecf-81ff-5de9386686b7)
+<img width="307" height="156" alt="image" src="https://github.com/user-attachments/assets/4d8e3fe1-3c24-43e2-81e3-986c27925a8e" />
+
 
 Kode di atas digunakan untuk mencetak teks "ini adalah file code guided praktikan" ke layar menggunakan function cout untuk mengeksekusi nya.
 
 #### Full code Screenshot:
-![240309_10h21m35s_screenshot](https://github.com/suxeno/Struktur-Data-Assignment/assets/111122086/41e9641c-ad4e-4e50-9ca4-a0215e336b04)
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/f56b2ba2-1452-42b4-9f2f-0e8d27d3033c" />
+
+### 2. Ubah Angka menjadi Kalimat
+<img width="581" height="126" alt="image" src="https://github.com/user-attachments/assets/750f5456-39c2-444c-b5f7-1116d997845b" />
+
+
+```c++
+#include <iostream>
+using namespace std;
+
+string satuan(int angka) {
+     switch (angka) {
+     case 1: return "satu";
+     case 2: return "dua";
+     case 3: return "tiga";
+     case 4: return "empat";
+     case 5: return "lima";
+     case 6: return "enam";
+     case 7: return "tujuh";
+     case 8: return "delapan";
+     case 9: return "sembilan";
+     default: return "";
+     }
+}
+
+int main() {
+     int bilangan;
+     string hasil;
+
+     cout << " || Program merubah angka menjadi sebuah tulisan ||" << endl;
+     cout << "Masukkan angka 0 - 100: ";
+     cin >> bilangan;
+
+     if (bilangan >= 0 && bilangan <= 100) {
+          if (bilangan == 0) {
+            hasil = "nol";
+        } else if (bilangan == 100) {
+            hasil = "seratus";
+        } else if (bilangan < 10) {
+            hasil = satuan(bilangan);
+        } else if (bilangan == 10) {
+            hasil = "sepuluh";
+        } else if (bilangan == 11) {
+            hasil = "sebelas";
+        } else if (bilangan < 20) {
+            hasil = satuan(bilangan % 10) + " belas";
+        } else { 
+            hasil = satuan(bilangan / 10) + " puluh";
+            if (bilangan % 10 != 0) {
+                hasil += " " + satuan(bilangan % 10);
+            }
+        }
+        cout << "Hasil: \n" << bilangan << ":" << hasil << endl;
+     } else {
+         cout << "Bilangan tidak valid, harus 0-100";
+     };
+
+     return 0;
+}
+      
+}
+```
+#### Output:
+<img width="1027" height="99" alt="image" src="https://github.com/user-attachments/assets/3e7492c8-5eb4-4122-8c99-74f76e72770c" />
+
+penjelasan
+
+#### Full code screenshot:
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/d6b3da10-ea13-402a-b15b-7a6d31dda052" />
+
+
+### 3. Segitiga Angka
+<img width="422" height="189" alt="image" src="https://github.com/user-attachments/assets/087a2123-40e2-4ac0-b34d-4fed4b488895" />
+
+
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main() {
+     int angka;
+     cout << " || Program mirror input output angka ||" << endl;
+
+     cout << "Input angka: ";
+     cin >> angka;
+     cout << endl;
+
+     cout << "Outputnya adalah : " << endl;
+     for (int i = angka; i >= 1; i-- ) {
+          // spasi 
+          for (int spasi = 0; spasi < angka-i; spasi++) {
+               cout << "  ";
+          }
+          // baris kiri besar ke kecil
+          for (int j = i; j >= 1; j--) {
+               cout << j << " ";
+          }
+          //bintang tengah
+          cout << "* ";
+          //baris kanan kecil ke besar
+          for (int j = 1; j <= i; j++){
+               cout << j << " ";
+          }
+          cout << endl;    
+      }
+      // bintang terakhir beserta spasi
+      for (int s = 0; s < angka; s++) {
+          cout << "  ";
+      }
+      cout << "*";
+      
+}
+```
+#### Output:
+<img width="864" height="174" alt="image" src="https://github.com/user-attachments/assets/dd06e9ff-70a5-494e-b732-907fe40d42e3" />
+
+
+penjelasan
+
+#### Full code screenshot:
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/36d5d19e-3554-4e3c-9dc8-4041bc406559" />
+
+
+
 
 
 ## Kesimpulan
