@@ -3,7 +3,24 @@
 
 ## Dasar Teori
 
-Modul ini awal praktikum struktur data dan menggunakan bahasa pemrograman C++. C++ adalah bahasa pemrograman yang dikembangkan dari bahasa C dengan penambahan fitur pemrograman berorientasi objek. C++ terdiri dari bagian utama seperti ```#include <iostream>``` yang digunakan untuk import library dan ```using namespace std``` untuk input output agar tidak mendeklarasikan ```std::``` berulang nantinya. fungsi ```int main()``` adalah program utama. modul ini akan membahas basic utama dari c++ seperti input-output, perulangan for, do-while, function, struktur, dan lain lain..
+Modul ini awal praktikum struktur data dan menggunakan bahasa pemrograman C++. C++ adalah bahasa pemrograman yang dikembangkan dari bahasa C dengan penambahan fitur pemrograman berorientasi objek. C++ terdiri dari bagian utama seperti ```#include <iostream>``` yang digunakan untuk import library dan ```using namespace std``` untuk input output agar tidak mendeklarasikan ```std::``` berulang nantinya. fungsi ```int main()``` adalah program utama. modul ini akan membahas basic utama dari c++ seperti input-output, perulangan for, do-while, function, struktur, dan lain lain.
+
+Struktur dasar C++ terdiri dari Tipe data, Variabel dan Konstanta
+Variabel, merupakan tempat menyimpan data yang nilainya dapat berubah. Setiap variabel memiliki ```Tipe data``` masing-masing. 
+Tipe data terdiri dari <code>int</code> sebagai bilangan bulat, <code>float</code> desimal, <code>char</code> untuk karakter atau string.
+```Konstanta``` Merupakan nilai yang tidak bisa diubah atau sudah fix, contohnya ```const_tipevariabel_namavar```
+
+Untuk pengguna, di C++ juga bisa melakukan I/O atau input output dengan cara menggunakan ```cout << ``` dan ```cin >>``` digunakan untuk input nilai dari suatu variabel. 
+
+Operator di C++ juga terbagi menjadi 2 yaitu
+<li>Operasi aritmatika</li>
+Merupakan operasi matematika pada dasarnya seperti pertambahan, pengurangan, perkalian, pembagian  (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>).
+<li>Operasi logika</li>
+Merupakan operasi yang digunakan untuk membandigkan nilai satu dengan nilai yang ada, contoh <code>&&</code>, <code>||</code>, <code><, >, <=, >= </code>) dan seterusnya.
+
+Perulangan(Looping dan forloop)
+Perulangan di C++ digunakan untuk mengeksekusi kode yang sama secara berulang. Kode <code>for</code> digunakan saat jumlah iterasi diketahui. Namun perulangan tidak hanya for saja, ada ```do while``` yang dimana mengeksekusi terlebih dahulu baru memeriksa kondisi apakah memenuhi syarat atau tidak. Kemudian ada <code>struct</code> digunakan mengelompomkan beberapa variabe, contoh ada struct mahasiswa yang memiliki isi nama, nim, kelas, nilai.
+
 
 ## Guided 
 
