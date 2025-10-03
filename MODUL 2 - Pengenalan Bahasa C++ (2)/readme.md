@@ -2,8 +2,13 @@
 <p align="center">RYAN MUHAMAD SAPUTRA</p>
 
 ## Dasar Teori
-
-[penjelasan teori modul 2]
+Modul kedua yang berjudul "Pengenalan Bahasa C++(Bagian Kedua) merupakan lanjutan dari modul 1. Pembahasan modul ini meliputi beberapa poin seperti Array dimensi, Memahami penggunaan pointer dan alamat memori, function serta procedur, dan call by reference.
+<ol>
+     <li><b>Array</b>, array merupakan struktur data di c++ yang digunakan untuk menyimpan kumpulan data atau nilai(dengan tipe data yang sama) dalam satu variabel. Array terbagi menjadi 3. Array satu domensi, array paling dasar dan cara mendeklarasikan cukup dengan <code>tipe_data nama_array[ukuran]</code>. Array 2 dimensi seperti tabel matriks dimana ukuran arraynya adalah baris dan kolom, contoh deklarasi <code>int data_nilai[4][3]</code>. Kemudian array 3 dimensi merupakan bentuk yang sangat kompleks diantara kedua array tersebut </li>
+     <li><b>Pointer</b>, merupakan variabel khusus yang digunakan untuk mengambil atau menyimpan alamat memori dari variabel lainnya. Cara mendeklarasikannya dengan <code>tipe_data *ptr</code>(digunakan mendeklarasikan pointer dan mengakses nilai yang berada di alamat memori yang ditunjung) dan <code>&</code>(digunakan untuk mendapatkan alamat memori dari sebuah varabel </li>
+     <li><b>Function dan prosedur</b>, sebuah kode yang digunakan untuk membuat program menjadi lebih terstruktur karena program semuanya tidak terletak pada func main saja, namun bisa bercabang. Perbedaan antara function dan procedur adalah function akan mengembalikan sebuah nilai(return value), sementara itu procedur fungsi yang tidak mengembalikan nilai. Cara mendeklarasikan function <code>tipe_data nama_variabel(parameter)</code> dan cara mendeklarasikan procedur gunakan <code>void nama_variabel(parameter)</code></li>
+     <li>Cara melewatkan parameter ada tiga cara yaitu <b>Call by value, call by pointer, dan call by reference</b></li>
+</ol>
 
 ## Guided 
 
@@ -181,4 +186,5 @@ Setelah praktikum pertama dilaksanakan, saya dapat menyimpulkan bahwa praktikum 
 
 ## Referensi
 [1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
+
 
