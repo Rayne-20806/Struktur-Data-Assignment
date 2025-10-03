@@ -161,19 +161,89 @@ Program diatas menjelaskan konsep sebuah reference di C++, yaitu sebuah nama ali
 ## Unguided 
 
 
-### 1. ..............
-<img width="422" height="189" alt="image" src="https://github.com/user-attachments/assets/087a2123-40e2-4ac0-b34d-4fed4b488895" />
+### 1. Matriks Operator
+<img width="756" height="68" alt="image" src="https://github.com/user-attachments/assets/9bed2960-e304-4104-9665-a30602e7ab2b" />
+
 
 
 
 ```c++
+#include <iostream>
+using namespace std;
 
+// prosedur untuk menampilkan matriks
+void tampilkanHasil(int matriks[3][3]) {
+    for (int i= 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << matriks[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    //buat matriks 3x3
+    int matriksA[3][3] = {
+        {1, 1, 1},
+        {2, 2, 2},
+        {3, 3, 3}
+    };
+    int matriksB[3][3] = {
+        {3, 3, 3},
+        {2, 2, 2},
+        {1, 1, 1}
+    };
+    int hasilMatriks[3][3];
+    // Matriks awal
+    cout << "Matriks A: " << endl;
+    tampilkanHasil(matriksA);
+    cout << "Matriks B: " << endl;
+    tampilkanHasil(matriksB);
+    cout << endl;
+
+
+    // operasi jumlah
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++){
+            hasilMatriks[i][j] = matriksA[i][j] + matriksB[i][j];
+        }
+    };
+    cout << "Hasil penjumlahan matrik A dan B: " << endl;
+    tampilkanHasil(hasilMatriks);
+
+    // operasi kurang
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            hasilMatriks[i][j] = matriksA[i][j] - matriksB[i][j];
+        }
+    };
+     cout << "Hasil pengurangan matrik A dan B: " << endl;
+    tampilkanHasil(hasilMatriks);
+
+
+    // operasi kali
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            hasilMatriks[i][j] = 0; // inisialisasi elemen hasilMatriks
+            for (int k = 0; k < 3; k++) {
+                hasilMatriks[i][j] += matriksA[i][k] * matriksB[k][j];
+            }
+        }
+    };
+    cout << "Hasil perkalian matrik A dan B: " << endl;
+    tampilkanHasil(hasilMatriks);
+
+    return 0;
+}
 ```
 #### Output:
-
+<img width="966" height="416" alt="image" src="https://github.com/user-attachments/assets/5fb9ad5b-7d97-4f06-a82e-8fa770e5b71b" />
+Program ini dirancang sebagai operator aritmatika pada sebuah matriks dimana ada operasi seperti penjumlahan, pengurangan, dan perkalian <code>+, -, *</code>. Program ini menggunakan prosedur <code>tampilkanMatriks()</code> untuk menampilkan hasil matriks yang akan dipanggil di program main dan memiliki 2 tipe data matriks A dan B sebagai. Untuk Perjumlahan dan pengurangan sama-sama menggunakan for bersarang atau nested-loop. Namun ada perbedaan pada perkalian matriks karena pada dasarnya perkalian matriks baris pertama dikalikan dengan kolom pertama kemudian dijumlah dan itu merupakan hasil matriks baris satu kolom satu dan seterusnya.
 
 
 #### Full code screenshot:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b0998b9b-b0fe-413a-83a9-05b0ad88ba26" />
+
 
 
 
@@ -186,5 +256,6 @@ Setelah praktikum pertama dilaksanakan, saya dapat menyimpulkan bahwa praktikum 
 
 ## Referensi
 [1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
+
 
 
