@@ -53,6 +53,12 @@ int main() {
 }
 }
 ```
+Program ini diimplementasikan dengan menggunakan array yang dimana ada 3 jenis array:
+<ol>
+     <li>Array 1 dimensi, array yang dideklarasikan sebagai <code>int arr1D[5]</code> yang dimana array akan menyimpan 5 buah value dengan tipe data int. Program ini juga menggunakan <code>for</code> untuk menampilkan semua array sebagai outputnya.</li>
+     <li>Array 2 dimensi, berbeda dengan 1 dimensi, array ini dideklarasika sebagai <code>int arr2D[2][3] </code> yang diartikan 2 baris dan 3 kolom. Masih sama menggunakan <code>for</code> untuk menampilkan nilai yang ada pada array tersebut.</li>
+     <li>Array 3 dimensi, berbeda dengan 1 dan 2 dimensi, array  ini merupakan perkembangan dari array 2 dimensi. Dekarasi sebagai <code>int arr3D[2][2][3]</code>. Program juga masih menggunakan <code>for</code> sebagai perulangan untuk menampilkan array tersebut.</li>
+</ol>
 
 
 ## 2. Procedur
@@ -76,6 +82,9 @@ int main() {
      return 0;
 }
 ```
+Program ini dibuat untuk menjelaskan bagaimana konsep dari procedur itu sendiri. Prosedur merupakan sebuah fungsi/function namun ia tidak mengembalikan nilai return, biasanya prosedur dideklarasikan dengan  <code>void_namaVariabel(tipedata_namaVariabel)</code>.
+
+Program ini memiliki sebuah prosedur bernama <code>tulis(int x)</code> yang bertugas mencetak baris sesuai input sebanyak x kali dari user. Pada program <code>int main()</code> berfungsi sebagai program utama yang akan menyuruh user melakukan input pada variabel jumlah yang kemudian akan memanggil prosedur <code>tulis(jumlah)</code>.
 
 ## 3. Pointer
 ```c++
@@ -106,6 +115,7 @@ int main() {
      return 0;
 }
 ```
+Program ini dibuat untuk mengerti konsep dasar pointer dalam C++. Pointer sendiri merupaman variabel khusus yang berfungsi untuk menyimpan alamat/address memori dari variabel lain. Program ini menginisialisasi sebuah variabel pointer yaitu <code>*ptr</code> untuk menunjuk ke alamt memori variabel a dengan menggunakan <code>ptr = &a</code>. Kemudian Program akan menampilkan output seperti <code>a(nilai a), &a(alamat a terletak), ptr(akan menyimpan alamat a), *ptr(mengambil value a)</code>. Bagian akhir dari terdapat fungsi <code>tukar</code> yNg digunakan untuk menukar nilai. Saat funsi dipanggil maka akan langsung memodifikasi variabel asli a dan b tanpa perlu menggunakan syntax pointer.
 
 ## 4. Reference
 ``` c++
@@ -140,6 +150,7 @@ int main() {
      return 0;
 }
 ```
+Program diatas menjelaskan konsep sebuah reference di C++, yaitu sebuah nama alias untuk variabel yang sudah ada. Reference berbeda dari pointer karena lebih sederhana dan aman digunakan. Cara meginisialisasikan sebuah reference adalah  ada tanda <code>&</code>
 
 
 ## Unguided 
@@ -170,3 +181,4 @@ Setelah praktikum pertama dilaksanakan, saya dapat menyimpulkan bahwa praktikum 
 
 ## Referensi
 [1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
+
