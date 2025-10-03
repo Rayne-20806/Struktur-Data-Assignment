@@ -164,9 +164,6 @@ Program diatas menjelaskan konsep sebuah reference di C++, yaitu sebuah nama ali
 ### 1. Matriks Operator
 <img width="756" height="68" alt="image" src="https://github.com/user-attachments/assets/9bed2960-e304-4104-9665-a30602e7ab2b" />
 
-
-
-
 ```c++
 #include <iostream>
 using namespace std;
@@ -236,6 +233,7 @@ int main() {
     return 0;
 }
 ```
+
 #### Output:
 <img width="966" height="416" alt="image" src="https://github.com/user-attachments/assets/5fb9ad5b-7d97-4f06-a82e-8fa770e5b71b" />
 Program ini dirancang sebagai operator aritmatika pada sebuah matriks dimana ada operasi seperti penjumlahan, pengurangan, dan perkalian <code>+, -, *</code>. Program ini menggunakan prosedur <code>tampilkanMatriks()</code> untuk menampilkan hasil matriks yang akan dipanggil di program main dan memiliki 2 tipe data matriks A dan B sebagai. Untuk Perjumlahan dan pengurangan sama-sama menggunakan for bersarang atau nested-loop. Namun ada perbedaan pada perkalian matriks karena pada dasarnya perkalian matriks baris pertama dikalikan dengan kolom pertama kemudian dijumlah dan itu merupakan hasil matriks baris satu kolom satu dan seterusnya.
@@ -244,10 +242,58 @@ Program ini dirancang sebagai operator aritmatika pada sebuah matriks dimana ada
 #### Full code screenshot:
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b0998b9b-b0fe-413a-83a9-05b0ad88ba26" />
 
+### 2. Pointer dan Reference
+<img width="775" height="67" alt="image" src="https://github.com/user-attachments/assets/0795d562-e5c3-4250-9ce5-70a8349f70d5" />
 
+```c++
+#include <iostream>
+using namespace std;
 
+// prosedur untuk menukar nilai menggunakan pointer
+void tukarPointer(int *x, int *y, int *z) {
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = *z ;
+    *z = temp;
+}
+// prosedur untuk menukar nilai menggunakan reference
+void tukarReference(int &x, int &y, int &z) {
+    int temp;
+    temp = x;
+    x = y;
+    y = z;
+    z = temp;
+}
 
+int main() {
+    int a = 1, b = 2, c = 3;
+    cout << "Sebelum menukar (Pointer): a = " << a << ", b = " << b << ", c = " << c << endl;
+    tukarPointer(&a, &b, &c);
+    cout << "Setelah menukar (Pointer): a = " << a << ", b = " << b << ", c = " << c << endl;
 
+    int a2 = 1, b2 = 2, c2 = 3;
+    cout << "Sebelum menukar (Reference): a2 = " << a2 << ", b2 = " << b2 << ", c2 = " << c2 << endl;
+    tukarReference(a2, b2, c2);
+    cout << "Setelah menukar (Reference): a2 = " << a2 << ", b2 = " << b2 << ", c2 = " << c2 << endl;
+
+    return 0;
+}
+```
+
+### Output:
+<img width="869" height="213" alt="image" src="https://github.com/user-attachments/assets/3f9683f5-c5cf-4101-af5d-e7ca88ef43f4" />
+[penjelasan]
+
+### Full Code Screenshot:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6b805e00-b8c0-42e4-b69e-719233a78e84" />
+
+### 3. Program Array Menu
+<img width="773" height="376" alt="image" src="https://github.com/user-attachments/assets/abf3b421-488b-43f8-a25f-b132e59d3c52" />
+
+```c++
+
+```
 
 
 ## Kesimpulan
@@ -256,6 +302,7 @@ Setelah praktikum pertama dilaksanakan, saya dapat menyimpulkan bahwa praktikum 
 
 ## Referensi
 [1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
+
 
 
 
