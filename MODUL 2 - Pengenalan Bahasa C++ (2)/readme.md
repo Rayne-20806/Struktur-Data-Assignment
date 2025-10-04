@@ -283,7 +283,17 @@ int main() {
 
 ### Output:
 <img width="869" height="213" alt="image" src="https://github.com/user-attachments/assets/3f9683f5-c5cf-4101-af5d-e7ca88ef43f4" />
-[penjelasan]
+Program ini dibuat untuk membandingkan dua metode dalam menukar 3 variabel, yaitu dengan menggunakan pointer dan reference.
+<ol>
+     <li>
+          Pointer, Fungsi <code>tukarPointer</code> akan menerima argumen berupa sebuah alamat memori dari variabel <code>(int *)</code>. Di dalam fungsi, nilai asli di akses dan dimodifikasi dengan menggunakan operator (*). Kemudian cara memanggil yaitu harus menggunakan operator &, contoh di atas <code>tukarPointer(&a, &b, &c)</code>
+     </li>
+     <li>
+          Reference, sama seperti diatas yaitu memungkinkan mengubah nilai variabel asli secara langsung namun dengan sintaks yang lebih sederhana daripada pointer.
+     </li>
+     
+</ol>
+variabel temp pada setiap procedur pointer dan reference digunakan untuk menyimpan nilai awal agar tidak akan hilang saat ditimpa.
 
 ### Full Code Screenshot:
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6b805e00-b8c0-42e4-b69e-719233a78e84" />
@@ -292,16 +302,126 @@ int main() {
 <img width="773" height="376" alt="image" src="https://github.com/user-attachments/assets/abf3b421-488b-43f8-a25f-b132e59d3c52" />
 
 ```c++
+#include <iostream>
+using namespace std;
 
+// function cara maks
+int cariMaksimum(int arr[], int ukuran) {
+    int maks = arr[0];
+    for (int i = 1; i < ukuran; i++) {
+        if (arr[i] > maks) {
+            maks = arr[i];
+        }
+    }
+    return maks;
+}
+
+// function cari min
+int cariMinimum(int arr[], int ukuran) {
+    int min = arr[0];
+    for (int i = 1; i < ukuran; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    };
+    return min;
+}
+
+// tampil isi array
+void tampilkanArray(int arr[], int ukuran) {
+    cout << "Isi array: ";
+    for (int i = 0; i < ukuran; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+// hitung rata2
+void hitungRataRata(int arr[], int ukuran) {
+    float total = 0;
+    for (int i = 0; i < ukuran; i++) {
+        total += arr[i];
+    }
+    cout << "Nilai rata-rata: " << total / ukuran << endl;
+}
+
+int main() {
+    int arr[] = {11, 8, 7, 12, 26, 3, 53, 33, 55};
+    // hitung ukuran array
+    int ukuran = sizeof(arr) / sizeof(arr[0]);
+
+    int pilihanMenu;
+    do {
+        cout << "\n---Menu Program Array ---" << endl;
+        cout << "\n1. Tampilkan isi array" << endl;
+        cout << "\n2. Cari nilai maksimum" << endl;
+        cout << "\n3. Cari nilai minimum" << endl;
+        cout << "\n4. Hitung nilai rata-rata" << endl;
+        cout << "\n5. Keluar(tambah)" << endl;
+        cout << "\nMasukkan pilihan Anda (1-5): ";
+        cin >> pilihanMenu;
+
+        switch (pilihanMenu) {
+            case 1:
+                tampilkanArray(arr, ukuran);
+                break;
+            case 2:
+                cout << "Nilai maksimum: " << cariMaksimum(arr, ukuran) << endl;
+                break;
+            case 3:
+                cout << "Nilai minimum: " << cariMinimum(arr, ukuran) << endl;
+                break;
+            case 4:
+                hitungRataRata(arr, ukuran);
+                break;
+            case 5:
+                cout << "Terima kasih telah menggunakan program ini." << endl;
+                break;
+            default:
+                cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
+                break;
+        }
+        // pause sebelum lanjut dan tekan enter saja
+        if (pilihanMenu != 5) {
+            cout << "Teken untuk melanjutkan..." << endl;
+            cin.ignore();
+            cin.get();
+        } 
+    }
+    
+    while (pilihanMenu != 5);
+
+    return 0;
+}
 ```
+
+### Output:
+<img width="902" height="299" alt="image" src="https://github.com/user-attachments/assets/eafc0e81-e5a0-4e47-bfca-5dec87db2fb2" />
+<img width="308" height="75" alt="image" src="https://github.com/user-attachments/assets/e161c44b-e77b-4018-a1a2-3b650e1fb98d" />
+<img width="312" height="76" alt="image" src="https://github.com/user-attachments/assets/fff0a602-5992-4bf5-a108-009a0a6ddebb" />
+<img width="313" height="72" alt="image" src="https://github.com/user-attachments/assets/fa9fdb7c-8e37-40e9-964d-bb2b3f63e5fe" />
+<img width="297" height="81" alt="image" src="https://github.com/user-attachments/assets/883e7b92-d9d5-49a1-a874-a9ca0df97fea" />
+<p></p>
+<img width="642" height="272" alt="image" src="https://github.com/user-attachments/assets/b6ed3920-3eaf-4586-b513-fdfdb55d8cb2" />
+
+
+Program diatas dibuat seperti aplikasi sederhana berbasis menu yang memungkinkan untuk menganalisis array yang sudah ditentukan isinya. Program ini memiliki berbagai function dan prosedur yang dipuisah agar menjaga kode terstruktur dan tidak terlalu banyak di kode main(utama), seperti function <code>cariMaksimum() dan cariMinimum</code> yang akan digunakan untuk menghitung nilai maks dan min dari penjumlahan array. Kemudian itu ada procedur <code>tampilkanArray() dan hitungRataRata()</code> yang akan di panggil di fungsi utama untuk menampilkan hasil dari tampilkan array dan juga hasil rata-rata array. Program ini menggunakan swich-case
+
+
+### Full code Screenshot:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/54edc589-5cc2-4cef-928c-b1f0f4a956a8" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/64f3197f-9267-46ea-a3d2-ae93a3cf2c3d" />
+
+
+
 
 
 ## Kesimpulan
-Ringkasan dan interpretasi pandangan kalia dari hasil praktikum dan pembelajaran yang didapat[1].
-Setelah praktikum pertama dilaksanakan, saya dapat menyimpulkan bahwa praktikum ini telah membuat saya memahami dan mampu mengimplementasikan konsep-konsep basic dasar di C++ seperti deklarasi variabel, tipe data, konstanta, for loop, do-while, dan juga struktur. Selain itu juga bagaimana cara mengimport library di c++, cara running code, belajar syntax c++, menurut saya mengganti bahasa pemrograman tidak masalah karena pada dasarnya yang terpenting adalah memahami algoritma pemrograman dan juga cara kerjanya serta yang membedakan hanya syntax code nya saja, selebihnya algoritmanya menurut saya sama dan tidak ada bedanya
+Berdasarkan praktikum modul 2 ini, dapat saya simpulkan bahwa praktikum kali ini mampu memahami konsep konsep lanjutan dari pemrograman c++ untuk struktur data. Pada modul ini mampu memahami bagaimana macam-macam array seperti array 1 dimensi yang merupakan kumpulan data yang hanya memiliki 1 tipe data, array 2 dimensi terdiri dari baris dan kolom(bentuknya seperti matriks), kemudian array 3 dimensi merupakan bentuk lanjutan dari array 2 dimensi namun lebih kompleks. Selanjutnya di praktikum kali ini diajarkan bagaimana cara membedakan function dan procedur yang dimana function akan mengembalikan nilai return, sementara itu procedur tidak mengembalikan nilai return dan cara mendeklarasikannya menggunakan void. Selain itu juga di praktikum kali ini kita belajar mengenai pointer, value, alamat dari suatu variabel dan juga belajar berbagai cara melewatkan parameter dengan menggunakan call by value, call by pointer, call by reference
 
 ## Referensi
 [1] I. Holm, Narrator, and J. Fullerton-Smith, Producer, How to Build a Human [DVD]. London: BBC; 2002.
+
 
 
 
