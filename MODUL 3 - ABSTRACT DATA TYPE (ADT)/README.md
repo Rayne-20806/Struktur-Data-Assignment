@@ -5,7 +5,7 @@
 ### 1. Apa Itu ADT?
 Pada Modul kali ini membahas ADT atau Abstract Data Type. ADT adalah Type dan sekumpulan PRIMITIF (operasi dasar) terhadap TYPE tersebut. Selain itu, dalam sebuah ADT yang lengkap, disertakan definisi invarian dari TYPE dan aksioma yang berlaku. ADT definisi dari STATIK.
 
-Definisi type dari sebuah ADT dapat mengandung sebuah definidi dari ADT lain:
+Definisi type dari sebuah ADT dapat mengandung sebuah definisi dari ADT lain:
 <ol>
     <li>
         ADT waktu terdiri dari ADT JAM dan ADT lain.
@@ -51,27 +51,27 @@ TYPE diterjemahkan menjad type terdefinis dalam bahasa yang bersangkutan. Jika d
 Biasanya ADT diimplementasikan menjadi dua buah modul utama dan satu modul interface program utama(driver).
 <ol>
     <li>
-        File Header (.h): File berisi definisi atau spesifikasi dari ADT. di dalamnya terdapat deklarasi struct dan prototype(deklarasi awal) dari semua fungsi atau prosedur.
+        File Header (<code>.h</code>): File berisi definisi atau spesifikasi dari ADT. di dalamnya terdapat deklarasi struct dan prototype(deklarasi awal) dari semua fungsi atau prosedur.
     </li>
     <li>
-        File implementasi(.cpp): File ini berisi realisasi atau kode program (body) dari setiap fungsi dan prosedur yang sudah dideklarasikan di file header. File ini meng #include file headernya sendiri.
+        File implementasi(<code>.cpp</code>): File ini berisi realisasi atau kode program (body) dari setiap fungsi dan prosedur yang sudah dideklarasikan di file header. File ini meng <code>#include</code> file headernya sendiri.
     </li>
     <li>
-        File Driver/Utama(main.cpp): Program utama yang akan menggunakan ADT tersebut. File ini juga meng #inclode file header (.h) untuk bisa mengakses tipe data dan fungsi yyang telah didefinisikan.
+        File Driver/Utama(<code>main.cpp</code>): Program utama yang akan menggunakan ADT tersebut. File ini juga meng #inclode file header (<code>.h</code>) untuk bisa mengakses tipe data dan fungsi yyang telah didefinisikan.
     </li>
 </ol>
 
 ### 4. Cara Menjalankan Program ADT di VS-CODE
-Karena program-program terpecah menjadi beberapa file (.h) dan (.cpp), cara menjalankannya berbeda dengan menjalankan file c++ yang berjumlah satu. Jadi misalkan kita mempunyai 3 file yaitu mahasiswa.h sebagai header, mahasiswa.cpp merupakan body dari setiao fungsi dan prosedur, dan main.cpp yang bergfungsi sebagai program utama yang akan menggunakan ADT tersebut.
+Karena program-program terpecah menjadi beberapa file (<code>.h </code>) dan (<code>.cpp</code>), cara menjalankannya berbeda dengan menjalankan file c++ yang berjumlah satu. Jadi misalkan kita mempunyai 3 file yaitu mahasiswa.h sebagai header, mahasiswa.cpp merupakan body dari setia <code>fungsi dan prosedur, dan main.cpp</code> yang bergfungsi sebagai program utama yang akan menggunakan ADT tersebut.
 <ol>
     <li>
-        Pastikan ketiga file tadi dalam satu folder yang sama di dalam VS-CODE, karena wajib 1 folder berisikan file (.h), (.cpp), (main.cpp)
+        Pastikan ketiga file tadi dalam satu folder yang sama di dalam VS-CODE, karena wajib 1 folder berisikan file <code>(.h), (.cpp), (main.cpp)</code>.
     </li>
     <li>
-        Kemudian buka terminal dan gunakan perintah g++ .\main.cpp .\mahasiswa.cpp -o mhs. Ini adalah file-file yang akan dikompilasi, kita harus menyertakan semua file .cppp agar kompiler bisa menggabungkan logika  dari program utama dan implementasi ADT. file .h tidak perlu disertakan karena sudah diinclude di file .cpp.
+        Kemudian buka terminal dan gunakan perintah <code>g++ .\main.cpp .\mahasiswa.cpp -o mhs </code>. Ini adalah file-file yang akan dikompilasi, kita harus menyertakan semua file <code>.cppp</code> agar kompiler bisa menggabungkan logika dari program utama dan implementasi ADT. file .h tidak perlu disertakan karena sudah diinclude di file .cpp.
     </li>
     <li>
-        Kemudian langsung saja jalankan perintah .\mhs.exe maka program akan berjalan.
+        Kemudian langsung saja jalankan perintah <code>.\mhs.exe</code> maka program akan berjalan.
     </li>
 </ol>
 
@@ -96,7 +96,7 @@ float rata2(mahasiswa m);
 
 
 ```
-Program ini bertindak sebagai file header. Didalam program ini mendefinisikan struct mahasiswa yang berisi variabel untuk nim, nilai1, dan nilai2. Selain itu, file ini mendeklarasikan fungsi dan prosedur yang beroperasi pada struct tersebut, yaitu void inputMhs() dan float rata2(). Adanya include (#ifnde, #define, #endif) memastikan bahwa isi file ini hanya dimasukkan sekali oleh compiler untuk menghidari error duplikasi.
+Program ini bertindak sebagai file header. Didalam program ini mendefinisikan struct mahasiswa yang berisi variabel untuk nim, nilai1, dan nilai2. Selain itu, file ini mendeklarasikan fungsi dan prosedur yang beroperasi pada struct tersebut, yaitu <code>void inputMhs() dan float rata2()</code>. Adanya include (<code>#ifnde, #define, #endif</code>) memastikan bahwa isi file ini hanya dimasukkan sekali oleh compiler untuk menghidari error duplikasi.
 
 ## 2. Mahasiswa.cpp
 ```c++
@@ -118,7 +118,7 @@ float rata2(mahasiswa m) {
 }
 
 ```
-Program ini berisi implementasi atau kode Program (body) dari fungsi-fungsi yang telah dideklarasikan sebelumnya di mahasiswa.h . Prosedur inputMhs() digunakan untuk meminta input dari pengguna dan menyimpannya ke dalam variabel struct mahasiswa. Fungsi/function dari float rata2() digunakan untuk menerima sebuah struct mahasiswa, menghitung nilai rata-rata antara nilai1 dan nilai2, lalu mengembalikan hasil perhitungan dalam bentuk float.
+Program ini berisi implementasi atau kode Program (body) dari fungsi-fungsi yang telah dideklarasikan sebelumnya di <code>mahasiswa.h</code> . Prosedur <code>inputMhs()</code> digunakan untuk meminta input dari pengguna dan menyimpannya ke dalam variabel struct mahasiswa. Fungsi/function dari <code>float rata2()</code> digunakan untuk menerima sebuah struct mahasiswa, menghitung nilai rata-rata antara nilai1 dan nilai2, lalu mengembalikan hasil perhitungan dalam bentuk float.
 
 ## 3. Main.cpp
 ```c++
@@ -134,7 +134,7 @@ int main() {
     return 0;
 }
 ```
-Program ini merupakan yang utama menggunakan ADT mahasiswa. File ini meng-include "mahasiwa.h" agar dapat mengenali struct dan fungsi yang telah kita buat. Di dalam main(), telah dibuat sebuah objek mhs dari struct mahasiswa, memanggil prosedur inputMhas() untuk mengisi data, yang terakhir akan memanggil fungsi rata2() untuk menampilkan hasil dari perhitungan rata-rata.
+Program ini merupakan yang utama menggunakan ADT mahasiswa. File ini meng-include <code>"mahasiwa.h"</code> agar dapat mengenali struct dan fungsi yang telah kita buat. Di dalam <code>main()</code>, telah dibuat sebuah objek mhs dari struct mahasiswa, memanggil prosedur <code>inputMhas()</code> untuk mengisi data, yang terakhir akan memanggil <code>fungsi rata2()</code> untuk menampilkan hasil dari perhitungan rata-rata.
 
 
 
@@ -214,7 +214,7 @@ int main() {
 
 <img width="1333" height="825" alt="image" src="https://github.com/user-attachments/assets/682a4a11-eace-4f3b-99cc-eade85987561" />
 
-[Penjelasan Program]
+Program diatas dibuat untuk menyimpan data mahasiswa dengan max 10 ke dalam sebuah array dengan field nama, nim uts, uas, tugas, dan nilai akhir. Nilai akhir diperoleh dari fungsi dengan rumus  <code>0.3*uts+0.4*uas+0.3*tugas</code>. Seperti biasa jangan lupa deklarasikan atau <code>#include</code> library untuk c++. Kemudian program ini mendeklarasikan sebuah <code>Struct mahasiswaArray</code> yang berisi beberapa variabel atau data untuk mahasiswa dan buat <code>fungsi rata2NilaiAkhir</code> yang nantinya akan digunakan untuk hasil akhir operasi beberapa variabel di dalam struct serta deklarasikan var konstanta untuk maks mahasiswa. Pada program <code>main</code> dideklarasikan kembali struct dengan var <code>mhs[MAX_MHS];</code> yang digunakan sebagai batasan untuk inputan nanti. Selain itu juga di program main ini akan meminta pengguna menginputkan jumlahMhs dan mengecek batasan apakah sesuai, kemudian ada inputan data untuk mahasiswa dan yang terakhir akan menampilkan data-data mahasiwa yang sebelumnya sudah diinputkan oleh pengguna.
 
 
 #### Full code screenshot:
@@ -246,6 +246,7 @@ pelajaran create_pelajaran(string namapel, string kodepel);
 void tampil_pelajaran(pelajaran pel);
 #endif
 ```
+
 #### 2. Pelajaran.cpp
 ```cpp
 #include <iostream>
@@ -265,6 +266,7 @@ void tampil_pelajaran(pelajaran pel) {
 }
 ```
 
+
 #### 3. main.cpp
 ```cpp
 #include <iostream>
@@ -280,16 +282,24 @@ int main() {
 }
 ```
 
+
 #### Output:
 <img width="1296" height="281" alt="image" src="https://github.com/user-attachments/assets/d6d28100-d6e3-4b07-94db-b3a3c3c887c2" />
 
-[Penjelasan Program]
+ 1. pelajaran.h
+File <code>pelajaran.h</code> digunakan untuk mendfinisikan sebuah ADT pelajaran. Di dalam program ini terdapat <code>struct pelajaran : namaMapel dan kodeMapel</code> yang nantinya akan menerima sebuah string. Kemudian ada prosedur <code>void tampil_pelajaran(pelajaran pel)</code> yang nantinya akan digunakan di program lainnya untuk menampilkan pelajaran. 
+2. pelajaran.cpp
+Program <code>pelajaran.cpp</code> ini sebagai implementasi bagaimana nantinya setiap fungsi/prosedur berjalan, seperti fungsi <code>pelajaran create_pelajaran()</code> dan prosedur menampilkan pelajaran <code>voide tampil_pelajaran()</code>. Program ini akan mengisi data dan juga menerima data khususnya pada fungsi.
+ 3. main.cpp
+Program <code>main.cpp</code> ini merupakan program utama pada ADT yang nantinya akan meng <code>#include pelajaran.h</code yang nantinya digunakan untuk membuat dan memanipulasi objek <code>pelajaran</code> dengan cara memanggil fungsi dan prosedur yang sudah ada tadi. Kemudiann program ini nantinya akan menampilkan output dari prosedur <code>tampil_pelajaran(pel)</code>.
+
 
 
 #### Full code screenshot:
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b9d626c5-c84e-4516-bcfb-fa50f11267e3" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/05d22de7-fd82-4786-97fa-fba7593d3131" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f4627d53-4ac1-42d9-af54-b2ec2c8696ac" />
+
 
 
 
@@ -391,9 +401,8 @@ int main() {
 
 
 
-
-
 ## Kesimpulan
+Berdasarkan praktikum yang dilaksanan online, saya mendapatkan bahwa kali ini dapat memahami dan mengerti apa sebuah ADT atau _Abstract Data Type_ dalam C++. Pemahaman utama yang bisa didapat ialah sebelum mengenal ADT, biasanya menumpuk file menjadi satu, namun setelah mengenal ADT mampu memisah file-file menjadi beberapa bagian dalam 1 folder karena pendekatan ini kode menjadi terlihat terstruktur, mudah dipahami, dan gampang dikelola. Selain itu juga memahami bagaimana cara memecah dan isi masing-masing file pada program <code>.h dan .cpp</code> agar mampu mengimplementasikan ADT dan melatih kemampuan lanjutan saya terkait bahasa pemrograman C++ agar ilmu saya semakin luas.
 
 
 
