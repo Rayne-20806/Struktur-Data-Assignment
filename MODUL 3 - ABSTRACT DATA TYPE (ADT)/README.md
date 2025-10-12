@@ -291,7 +291,7 @@ File <code>pelajaran.h</code> digunakan untuk mendfinisikan sebuah ADT pelajaran
 2. pelajaran.cpp
 Program <code>pelajaran.cpp</code> ini sebagai implementasi bagaimana nantinya setiap fungsi/prosedur berjalan, seperti fungsi <code>pelajaran create_pelajaran()</code> dan prosedur menampilkan pelajaran <code>voide tampil_pelajaran()</code>. Program ini akan mengisi data dan juga menerima data khususnya pada fungsi.
  3. main.cpp
-Program <code>main.cpp</code> ini merupakan program utama pada ADT yang nantinya akan meng <code>#include pelajaran.h</code yang nantinya digunakan untuk membuat dan memanipulasi objek <code>pelajaran</code> dengan cara memanggil fungsi dan prosedur yang sudah ada tadi. Kemudiann program ini nantinya akan menampilkan output dari prosedur <code>tampil_pelajaran(pel)</code>.
+Program <code>main.cpp</code> ini merupakan program utama pada ADT yang nantinya akan meng <code>#include pelajaran.h</code> yang nantinya digunakan untuk membuat dan memanipulasi objek <code>pelajaran</code> dengan cara memanggil fungsi dan prosedur yang sudah ada tadi. Kemudiann program ini nantinya akan menampilkan output dari prosedur <code>tampil_pelajaran(pel)</code>.
 
 
 
@@ -389,7 +389,9 @@ int main() {
 #### Output:
 <img width="1564" height="976" alt="image" src="https://github.com/user-attachments/assets/615f957e-8cf9-48e3-8e7c-47a40143a9dc" />
 
-[Penjelasan Program]
+Program ini dibuat dengan berbagai ketentuan untuk membuat dua buah array 2 dimensi(baris x kolom) yang nantinya akan menukarkan dengan fungsi posisi tertentu dan menukarkan dengan variabel yang ditunjuk oleh pointer. Array disini mulai dari 0 yang dimana [0][0] memiliki arti baris 1 dan kolom 1.
+
+Program ini memiliki prosedur <code>void tampilkanArray()</code> yang didalamnya berisi perulangan 1(untuk baris) dan perulangan 2(untuk kolom) atau nested loop(perulangan dalam perulangan) yang nantinya akan menampilkan hasil Array. Kemudian ada prosedur <code>void tukarElemenArray</code> yang akan digunakan sebagai operasi untuk menukar array sesuai baris dan kolom, ini juga di deklarasikan variabel <code>temp</code> untuk menyimpan nilai <code>arrSatu[baris][kolom]</code> agar tidak hilang saat proses pertukaran. Selanjutnya yang terpenting adalah prosedur <code>tukarViaPointer()</code> yang sama juga digunakan untuk proses pertukaran, bedanya dengan menukar biasa dengan pointer yaitu pointer akan menukarkan isi dari variabel atau nilai yang ditunjuk oleh pointer nantinya. Karena pointer ini menerima alamat memori sebagai argumen dan fungsinya bisa mengubah nilai asli variabel secara fleksibel. Pada Program <code>main()</code> berisi hal penting dalam mendeklarasikan dua array 2d yang berukuran 3 x 3(baris x kolom) dan akan menampilkan isinya. Kemudian program main ini akan melakukan pertukaran pertama elemen posisi dengan <code>tukerElemenArray()</code> dan setelahnya melakukan pertukaran dengan <code>tukarViaPointer()</code>.
 
 
 #### Full code screenshot:
