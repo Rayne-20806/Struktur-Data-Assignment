@@ -133,7 +133,6 @@ int main() {
     cout << "Rata-rata nilai = " << rata2(mhs) << endl;
     return 0;
 }
-}
 ```
 Program ini merupakan yang utama menggunakan ADT mahasiswa. File ini meng-include "mahasiwa.h" agar dapat mengenali struct dan fungsi yang telah kita buat. Di dalam main(), telah dibuat sebuah objek mhs dari struct mahasiswa, memanggil prosedur inputMhas() untuk mengisi data, yang terakhir akan memanggil fungsi rata2() untuk menampilkan hasil dari perhitungan rata-rata.
 
@@ -147,39 +146,151 @@ Program ini merupakan yang utama menggunakan ADT mahasiswa. File ini meng-includ
 
 ```c++
 #include <iostream>
+#include <limits> // digunakan untuk numeric_limits
 using namespace std;
 
 
+struct mahasiswaArray {
+    string nama;
+    string nim;
+    float uts, uas, tugas;
+    float nilaiAkhir;
+};
+
+float rata2NilaiAkhir(float uts, float uas, float tugas) {
+    return (0.3 * uts) + (0.4 * uas) + (0.3 * tugas);
+};
+
+const int MAX_MHS = 10;
+
+int main() {
+    mahasiswaArray mhs[MAX_MHS];
+    int jumlahMhs = 0;
+    
+    cout << "||Program Menghitung Rata-rata Nilai Akhir Mahasiswa||" << endl;
+    cout << "Masukkan jumlah Mahasiswa (maksimal 10); ";
+    cin >> jumlahMhs;
+    
+    if (jumlahMhs > MAX_MHS) {
+        cout << "Jumlah Mahasiswa melebihi batas maksimal: " << MAX_MHS << endl;
+        return 1;
+    }
+
+    cout << endl;
+    cout <<  "-- Input Data Mahasiswa -- ";
+    for (int i = 0; i < jumlahMhs; i++) {
+        cout << "\nMasukkan data mahasiswa ke-" << i+1 << endl;
+        cout << "Nama: "; 
+        // membersihkan newline character dari input sebelumnya
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, mhs[i].nama); // untuk menangkap spasi pada nama
+        cout << "NIM: ";
+        cin >> mhs[i].nim;
+        cout << "Nilai UTS: ";
+        cin >> mhs[i].uts;
+        cout << "Nilai UAS: ";
+        cin >> mhs[i].uas;
+        cout << "Nilai Tugas: ";
+        cin >> mhs[i].tugas;
+
+        mhs[i].nilaiAkhir = rata2NilaiAkhir(mhs[i].uts, mhs[i].uas, mhs[i].tugas);
+    }
+    cout << endl;
+    cout << "-- Data Mahasiswa --" << endl;
+    for (int i = 0; i < jumlahMhs; i++) {
+        cout << "==========================" << endl;
+        cout << "Mahasiswa ke-" << i+1 << endl;
+        cout << "Nama: " << mhs[i].nama << endl;
+        cout << "NIM: " << mhs[i].nim << endl;
+        cout << "Nilai Akhir: " << mhs[i].nilaiAkhir << endl;
+    }
+    cout << "==========================" << endl;
+    return 0;
 }
 ```
 
 #### Output:
-[SS OUTPUT]
+<img width="1090" height="94" alt="image" src="https://github.com/user-attachments/assets/6f7cf30e-8828-4101-a1f7-32b8dfbd3f22" />
+
+<img width="1333" height="825" alt="image" src="https://github.com/user-attachments/assets/682a4a11-eace-4f3b-99cc-eade85987561" />
+
 [Penjelasan Program]
 
 
 #### Full code screenshot:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b5ca68d8-5584-463a-802a-472d0afe2ba7" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7f4b3b36-d092-485b-b672-4b55ad098842" />
 
 
 
-### 2. Program Pelajaran Dengan Menggunakan ADTA
+
+
+
+### 2. Program Pelajaran Dengan Menggunakan ADT (Abstract Data Type)
 <img width="863" height="537" alt="image" src="https://github.com/user-attachments/assets/bf8de443-2abf-4418-bec2-d94c4ea1f3bd" />
 
+#### 1. pelajaran.h
+```h
+#ifndef PELAJARAN_H_INCLUDED
+#define PELAJARAN_H_INCLUDED
 
-```c++
-#include <iostream>
+#include <string>
 using namespace std;
 
+struct pelajaran {
+    string namaMapel;
+    string kodeMapel;
+};
 
+pelajaran create_pelajaran(string namapel, string kodepel);
+void tampil_pelajaran(pelajaran pel);
+#endif
+```
+#### 2. Pelajaran.cpp
+```cpp
+#include <iostream>
+using namespace std;
+#include "pelajaran.h"
+
+pelajaran create_pelajaran(string namapel, string kodepel) {
+    pelajaran pel; // var struct sementara
+    pel.namaMapel = namapel;
+    pel.kodeMapel = kodepel;
+    return pel;
+}
+
+void tampil_pelajaran(pelajaran pel) {
+    cout << "NamA pelajaran: " << pel.namaMapel << endl;
+    cout << "nilai: " << pel.kodeMapel << endl;
+}
+```
+
+#### 3. main.cpp
+```cpp
+#include <iostream>
+#include "pelajaran.h"
+using namespace std;
+
+int main() {
+    string namapel = "Struktur Data";
+    string kodepel = "STD";
+    pelajaran pel = create_pelajaran(namapel,kodepel);
+    tampil_pelajaran(pel);
+    return 0;
 }
 ```
 
 #### Output:
-[SS OUTPUT]
+<img width="1296" height="281" alt="image" src="https://github.com/user-attachments/assets/d6d28100-d6e3-4b07-94db-b3a3c3c887c2" />
+
 [Penjelasan Program]
 
 
 #### Full code screenshot:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b9d626c5-c84e-4516-bcfb-fa50f11267e3" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/05d22de7-fd82-4786-97fa-fba7593d3131" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f4627d53-4ac1-42d9-af54-b2ec2c8696ac" />
+
 
 
 
@@ -194,7 +305,7 @@ using namespace std;
 using namespace std;
 
 
-}
+
 ```
 
 #### Output:
