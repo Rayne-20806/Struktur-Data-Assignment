@@ -65,14 +65,14 @@
 ```
 
 1.2 Program .cpp
-'''cpp
+```cpp
 
-'''
+```
 
 1.3 Program main.cpp
-'''cpp
+```cpp
 
-'''
+```
 
 #### Output:
 
