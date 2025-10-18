@@ -2,7 +2,53 @@
 <p align="center">RYAN MUHAMAD SAPUTRA</p>
 
 ## Dasar Teori
-[Penjelasan teori]
+## 1.Linked List dengan pointer
+Pada Modul kali ini mempelajari terkait dengan Linked List atau tepatnya bisa disebut sebagai list saja tetapi kali ini  dengan menggunakan pointer. SLL inisalah satu bentuk struktur data (representasi penyimpanan) berupa serangkaian elemen data yang saling berhubungan atau terikat dan bersifat fleksibel karena dapat tumbuh dan berkurang sesuai kebutuhan. Data yang disimpan biasanya tunggal atau majemuk. Tunggal berarti terdiri dari <code>satu variabel saja dan satu tipe data</code>. Sementara majemuk kumpulan data(record) yang di dalamnya terdiri dari <code>berbagai tipe data</code>, contoh data mahasiswa terdiri dari <code>nama string, NIM int, Alamat string</code>.
+
+Alasan memakai pointer:
+<ol>
+    <lI>
+        <code>Dinamis VS Statis</code>, pointer bersifat dinamis yang artinya dapat menambah atau mengurangi elemen kapan saja sesuai kebutuhan. Sementara itu array bersifat statis yang artinya ukurannya harus ditentukan sejak awal sebelum membuat dan tidak dapat diubah lagi setelah itu.
+    </lI>
+    <li>
+        <code>Saling Berkait</code>, Linked list yang saling berikat atau bergantungan dimana elemen saling menunjuk satu sama lain(1-2-3-4).
+    </li>
+    <li>
+        <code>Efisien</code>, lebih mudah untuk melakukan insert(tambah) dan delete(hapus) dimanapun, contohnya awal, akhir, tengah tanpa menggeser elemen lainnya seperti pada array.
+    </li>
+</ol>
+
+## 2. Singly Linked List.
+Merupakan model ADT linked list yang hanya memiliki satu arah pointer, terdapat sebuah kotak / elemen yang terdiri dari dua bagian, bagian kiri disebut dengan <code>data</code> yang digunakan untuk menyimpan informasi utama seperti nilai dari variabel. Kemudian ada <code>Next atau suksesor</code> yang digunakan untuk menghubungkan antar elemen sebelumnya dengan elemen selanjutnya.
+
+Sifat dari singly Linked List: Hanya memerlukan satu buah pointer, Node akhir menunjuk ke nil kecuali untuk list circular, hanya dapa melakukan pembacaan maju, lebih mudah melakukan penyisipan, pencarian sekuensial dilakukan  jika data tidak terurut.
+
+Istilah-istilah penting: first/heaad, next, NULL/nil, Node/Simpul/Elemen.
+
+### 2.1 Pembentukan Komponen-Komponen List
+<ol>
+    <li>
+        Pembentukan List (CreateList), sebuah prosedur yang digunakan untuk membuat sebuah list baru yang kosong. Prosesnya dengan mengatur pointer <code>first</code> menjadi <code>Nil</code>.
+    </li>
+    <li>
+        Alokasi Memori, merupakan fungsi memesan gerbong atau node baru di memori. syntax <code>alokasi()</code>.
+    </li>
+    <li>
+        Dealokasi, digunakan untuk menghapus sebuah memory address yang tersimpan atau telah dialokasikan dalam bahasa pemrogramn C. syntax <code>delete p</code>.
+    </li>
+    <li>
+        Pengecekan List, Fungsi yang digunakan untuk mengecek apakah list itu kosong atau tidak. Akan mengembalikan nilai true(kosong) atau false(tidak kosong). Syntax <code>isEmpty()</code>.
+    </li>
+</ol>
+
+### 2.2 Insert
+Dalam setiap metode memasukkan, pasi ada istilah yang namanya insert(penambahan). Macam-macam insert: <code>Insert First, Insert Last, Insert After( memasukkan data ke dalam list yang diletakkan setelah node tertentu yang ditunjuk oleh user)</code>.
+
+### 2.3 View
+Merupakan operasi dasar pada list yang menampilkan isi node/simpul dengan suatu penelusuran list.
+Mengunjungi setiap node kemudian menampilkan data yang tersimpan pada node tersebut.
+Semua fungsi dasar di atas merupakan bagian dari ADT dari singgle linked list, dan aplikasi pada bahasa
+pemrograman Cp semua ADT tersebut tersimpan dalam file <code>*.c dan file *.h.</code>
 
 
 ## Guided 
