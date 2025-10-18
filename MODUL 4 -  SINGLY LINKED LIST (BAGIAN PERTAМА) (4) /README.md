@@ -92,7 +92,7 @@ void insertLast(linkedlist &List, address nodeBaru);
 
 #endif
 ```
-[Penjelasan program]
+
 
 ## 1.2 list.cpp
 ```cpp
@@ -188,7 +188,7 @@ void printList(linkedlist List) {
     }
 }
 ```
-[Penjelasan Program
+
 
 ## 1.3 main.cpp
 ```cpp
@@ -222,7 +222,7 @@ int main(){
     return 0;
 }
 ```
-[penjelasan program]
+
 
 ## 2. Lanjutan Program SLL dengan penambahan bagaimana cara delete di SLL
 ## 2.1 list.h
@@ -501,11 +501,6 @@ int main(){
 ```
 
 
-
-[Penjelasan kode]
-
-
-
 ## Unguided 
 
 ### 1. Program SLL(Single Linked List) dengan menggunakan ADT
@@ -622,9 +617,18 @@ int main () {
 #### Output:
 <img width="1623" height="182" alt="image" src="https://github.com/user-attachments/assets/4c31e9d8-c4c6-491c-a95d-b3c7e1ccacc4" />
 
-
-[Penjelasan program]
-
+Program ini dibuat dengan menerapkann Abstract Data Type (ADT) dan Single Linked List (SLL). Tujuannya untuk membuat struktur data, alokasi memori. Program ini dipecah menjadi 3 file seperti biasa karena menggunakan ADT:
+<ol>
+    <li>
+        <code>Singlylist.h</code>, Setiap menggunakan ADT pasti ada .h karena digunakan untuk antarmuka di ADT linglylist ini. File ini berisi infotype sebagai int, struct elmlist sebagai yang nantinya akan digunakan untuk node dan menyimpan info dan next, serta struct List yang digunakan sebagai menyimpan pointer first. File ini juga akan mendeklarasikan beberapa function atau prosedur seperti <code>CreateList, alokasi, dealokasi, printInfo, dan insertFirst</code>.
+    </li>
+    <li>
+        <code>Singlylist.cpp</code>, file ini merupakan badan dari file .h yang dimana berisi semua implementasi function dan prosedur. <code>create list</code> L.first menjadi nil. <code>alokasi</code> berfungsi untuk memesan memori (new elmlist) untuk sebuah node baru, mengisinya dengan data (x), mengatur next ke nil. <code>dealokasi</code> menggunakan fitur delete dan yang terpenting <code>insertFIrst</code> digunakan untuk menyabungkan P -> next ke L.first yang lama lalu memperbarui L.first agar menunjuk ke P. <code>printInfo</code> digunakan untuk mencetak setiap info dari setiap node dengan menggunakan perulangan while loop.
+    </li>
+    <li>
+        <code>main.cpp</code>, tentunya ini merupakan program utama dari Singly linked list ini. Program ini menginisialisasi List L , lalu secara berurutan mengalokasi dan memasukkan lima nilai (2, 0, 8, 12, 9) menggunakan insertFirst . Karena insertFirst selalu menambah di depan, urutan akhir di dalam list menjadi kebalikan dari urutan input, yaitu 9 -> 12 -> 8 -> 0 -> 2. Kemudian printInfo(L) digunakan untuk menampilkan hasil di terminal nantinya.
+    </li>
+</ol>
 
 #### Full code screenshot:
 #### 1. FULL BAGIAN Singlylist.h
@@ -637,14 +641,8 @@ int main () {
    <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1a9dfb06-8f22-4b60-ac67-41c86b636810" />
 
 
-
-
-
-
-
 ### 2. Lanjutan dari no 1
 <img width="704" height="269" alt="image" src="https://github.com/user-attachments/assets/6ac9db2d-d52b-4592-b27d-c0ac9f4ef5dc" />
-
 
 
 #### 1. Singlylist.h
@@ -836,9 +834,18 @@ int main () {
 
 #### Output:
 <img width="1393" height="402" alt="image" src="https://github.com/user-attachments/assets/1561326e-b638-4ecb-9d3b-08d38c256484" />
-
-
-[Penjelasan kode]
+Program no 2 ini merupakan lanjutan dari no 1, hanya saja disini membedakan ialah menambahkan sebuah fitur baru yaitu bagaimana cara mendelete atau menghapus sebuah node. Seperti biasa ada 3 file karena menggunakan ADT:
+<ol>
+    <li>
+        <code>Singlylist.h</code>, memiliki penambahan tiga fungsi penghapusan yaitu <code>deleteFirst, deleteLast, deleteAfter</code> dan dua fungsi lagi lainnya seperti <code>nbList</code> yang digunakan untuk menghitung jumlah node dan <code>deleteList</code> yang digunakan untuk menghapus semua elemen, harus menggunakan call-by-reference (List &L) agar dapat memodifikasi list asli.
+    </li>
+    <li>
+        <code>Singlylist.cpp</code>, mengimplementasikan fungsi baru dari .h yang berisi kelima fungsi baru untuk delete dan juga 2 fungsi lainnya.
+    </li>
+    <li>
+        <code>main.cpp</code> seperti biasa ini merupakan program main yang berfungsi menjalankan fungsi-fungsi yang baru ditambahkan. Setelah list 9 -> 12 -> 8 -> 0 -> 2, <code>deleteFirst()</code> akan dipanggil untuk hapus nilai 9(node awal). <code>deleteLast</code> digunakan untuk menghapus nilai 2(node terakhir). <code>deleteAfter(L,P4)</code> digunakan untuk menghapus 8 yang dimana p4 merupakan pointer ke node 12. Kemudian akan menghasilkan output 12 0 saja. <code>nbList</code> digunakan untuk menghitung berapa node yang ada, seperti contohnya hanya tersisa 2 node saja. Kemudian yang terakhir ada <code>deleteList</code> digunakan untuk menghapus seluruh list yang ada.
+    </li>
+</ol>
 
 
 
@@ -856,12 +863,8 @@ int main () {
 
 
 
-
-
-
-
 ## Kesimpulan
-[Kesimpulan yang didapat dari laprak]
+Berdasarkan kesimpulan yang di dapat setelah praktikum struktur data, Saya jadi mengerti bagaimana mengimplementasikan struktur data yang dinamis dibandingkan array dengan menggunakan Single linked List (SLL) dengan konsep ADT agar pemrograman menjadi terstruktur dengan cara memisahkan 3 file menjadi .h .cpp dan main.cpp. SLL ini merupakan struktur data yang berupa kumpulan node yang dimana setiap node saling terhubung dengan node lainnya dan node berisi info dan next. Pada praktikum kali ini juga tidak hanya mempraktikan bagaimana cara membuat node, tetapi bagaimana cara menambahkan node dan menghapus node (deleteFirst, deleteAfter, deleteLast). Menurut saya memang materi praktikum kali ini bisa sangat kompleks karena menerapkan konsep ADT dan juga membuat Single linked list yang dimana ini bisa menjadi lanjutan untuk saya dalam memahami materi struktur data kali ini
 
 
 
