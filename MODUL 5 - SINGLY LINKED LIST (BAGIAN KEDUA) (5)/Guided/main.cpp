@@ -56,4 +56,4 @@ int main(){
 }
 
 //note: jika ingin hapus list maka lepas dulu pointer previousnya agar bisa hapus node
-// Untuk Laprak Unguided....hindara Data Buah dan Data Mahasiswa
+// Untuk Laprak Unguided....hindari Data Buah dan Data Mahasiswa
