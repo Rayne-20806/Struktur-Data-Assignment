@@ -287,4 +287,3 @@ void FindNodeByRange(linkedlist list, float hargaAwal, float hargaAkhir) {
     }
     cout << endl;
 }
-
