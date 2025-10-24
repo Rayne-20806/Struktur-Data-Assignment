@@ -30,7 +30,18 @@ int main(){
     cout << endl;
 
 
+
+    
     cout << "--- ISIS LIST SETELAH DILAKUKAN UPDATE --- " << endl;
+    cout << "(Memanggil updateFirst...)\n";
+    updateFirst(List); // Ini akan mengupdate node "Jeruk"
+    
+    cout << "\n(Memanggil updateLast...)\n";
+    updateLast(List);  // Ini akan mengupdate node "Durian"
+    
+    cout << "\n(Memanggil updateAfter nodeC 'pir'...)\n";
+    updateAfter(List, nodeC); // Ini akan mengupdate node setelah "pir", yaitu "Semangka"
+
     printList(List);
     cout << "Jumlah node: " << nbList(List) << endl;
     cout << endl;
@@ -56,4 +67,4 @@ int main(){
 }
 
 //note: jika ingin hapus list maka lepas dulu pointer previousnya agar bisa hapus node
-// Untuk Laprak Unguided....hindari Data Buah dan Data Mahasiswa
+// Untuk Laprak Unguided....hindara Data Buah dan Data Mahasiswa
