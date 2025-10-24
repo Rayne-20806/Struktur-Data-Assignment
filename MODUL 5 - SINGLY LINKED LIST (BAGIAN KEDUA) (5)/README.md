@@ -2,7 +2,15 @@
 <p align="center">RYAN MUHAMAD SAPUTRA</p>
 
 ## Dasar Teori
-[PENJELASAN TEORI MODUL 5
+Modul 5 kali ini merupakan lanjutan dari modul 4 yaitu Singly linked list bagian pertama, hanya saja ini yang bagian kedua. Pada pembahasan kali ini membahas terkait Update dan juga searching pada Singly linked List.
+<ol>
+    <li>
+        Update(). Pada SLL kita dapat melakukan update, disini update ada 3 macam yaitu <code>UpdateFirst, updateLast, dan updateAfter</code>. Operasi update ini merupakan proses memodifikasi bagian <code>info</code> didalam node yang sudah ada di dalam list. Berbeda halnya dengan insert dan juga delete yang memanipulasi pointer next, update hanya mengubah nilai dari info pada suatu nodenya saja. Untuk <code>updateFirst</code> akan melakukan update node yang ditunjuk oleh pointer first. <code>updateLast</code> akan melakukan penelusuran atau pencarian hingga node akhir yang dimana <code>next -> Nil</code> lalu mengubah info di node tersebut. <code>updateAfter</code> akan mengubah info pada node yang berada tepat setelah node prev(node sebelumnya) yang diberikan. Penting diingat juga bahwa fungsi-fungsi tersebut harus menerima parameter <code>List &L</code> atau call by reference yang dimana agar perubahan data bersifat permanen pada list asli.
+    </li>
+    <li>
+        Searching merupakan operasi dasar list dengan melakukan aktivitas pencarian terhadap node-node tertentu. Proses ini akan mengunjungi setiap node(raversal) dan berhenti setelah node yang dicari ketemu atau status pencarian ada(TRUE). Dengan melakukan operasi searching, operasi-operasi seperti insert after, delete after, dan update akan lebih mudah. Pada praktikum kali ini dijelaskan juga ada macam-macam seraching berdasarkan pencarian seperti <code>Searching data(mencari berdasarkan data), Searching address(mencari berdasarkan alamat), Searching range(mencari berdasarkan jarak)</code>.
+    </li>
+</ol>
 
 
 ## Guided 
@@ -461,7 +469,9 @@ int main(){
 
 
 ## Kesimpulan
-[Isi Kesimpulan
+Berdasarkan praktikum modul 5 yang telah saya dapatkan bahwa modul kali ini hanya melanjutkan ADT Singly Linked List dari modul sebelumya. Modul kali ini lebih berfokus pada implementasi dua operasi baru pada SLL, yaitu <code>Update dan Searching</code>. Disini saya berhasil mengimplementasikan dan juga membuat 3 variasi update seperti <code>updateFirst. updateLast, updateAfter</code> yang digunakan untuk mengubah info dari node tanpa mengubah pointer nextnya.
+
+Selain itu juga saya belajar mengimplementasikan tiga metode searching yaitu <code>FindNodeByData, FindNodeByAddress, FindNodeByRange</code> dengan prinsip traversal(penelusuran) dari first(awal) hingga nil(akhir) untuk menemukan node berdasarkan pencarian tertentu. Kesimpulan yang didapat menurut saya juga yaitu mampu menerapkan searching dan juga update pada ADT SLL ini, intinya fondasi dasar praktikum kali ini ialah harus mengerti ADT dan SLL basic(bagian pertama) agar dapat melanjutkan materi modul selanjutnya.
 
 
 
