@@ -463,7 +463,189 @@ int main(){
   
    
 #### 3. FULL BAGIAN main.cpp
-   
+
+
+
+### 2. Latihan modul 2,3,4
+<img width="566" height="740" alt="image" src="https://github.com/user-attachments/assets/709112b7-b4bf-444a-8865-6ff6eb86991c" />
+<img width="566" height="528" alt="image" src="https://github.com/user-attachments/assets/17196caa-26c1-44ce-a877-1c9f6c54c845" />
+
+### 2.1 Program Singlylist.h
+```h
+// implementasi latihan no 2
+#ifndef SINGLYLIST_H
+#define SINGLYLIST_H
+
+#include <iostream>
+using namespace std;    
+#define nil NULL
+
+typedef  int infotype;
+typedef struct ElmList *address;
+struct ElmList {
+    infotype info;
+    address next;
+};
+
+struct List {
+    address first;
+};
+
+void CreateList(List &L);
+address alokasi(infotype x);
+void dealokasi(address &P);
+void printInfo(List L);
+void  insertFirst(List &L, address P);
+
+//implementasi latihan no 3
+address findElm(List L, infotype x);
+
+// implementasi latihan no 4
+int sumInfo(List L);
+
+#endif
+```
+
+### 2.2 Program Singlylist.cpp
+```cpp
+// Implementasi file Singly Linked List (SLL)
+#include "Singlylist.h"
+#include <iostream>
+using namespace std;
+#define nil NULL
+
+void CreateList(List &L) {
+    /* I.S. sembarang
+       F.S. terbentuk list kosong */
+    L.first = nil;
+}
+address alokasi(infotype x) {
+    /* Mengembalikan address hasil alokasi node baru
+       Jika alokasi gagal, kembalikan Nil */
+    address P = new ElmList;
+    if (P != nil) {
+        P -> info = x;
+        P -> next = nil;
+    }
+    return P;
+}
+void dealokasi(address &P){
+/* I.S. P terdefinisi
+       F.S. memori yang digunakan P dikembalikan */
+    delete P;
+}
+void printInfo(List L){
+    /* I.S. List mungkin kosong
+       F.S. Menampilkan info semua elemen list */
+    address P = L.first;
+    while (P != nil) {
+        cout << P -> info << " ";
+        P = P -> next;
+    }
+    cout << endl;
+}
+void  insertFirst(List &L, address P){
+    /* I.S. sembarang, P sudah dialokasikan
+       F.S. P menjadi elemen pertama list */
+    if (L.first == nil) {
+        L.first =  P;
+    }
+    else {
+        P -> next = L.first;
+        L.first = P;
+    }
+}
+
+// implementasi latihan no 3
+address findElm(List L, infotype x) {
+    /* Mencari apakah ada elemen list dengan P->info = x */
+    address P = L.first;
+    while (P != nil) {
+        if ( P -> info == x) {
+            return P; // ketemu, kembalikan addressnya
+        }
+        else {
+            P = P -> next; // pindah ke node selanjutnya
+        }
+    }
+    // jika tidak ada
+    return nil;
+}
+
+// implementasi latihan no 4
+int sumInfo(List L) {
+    /* Mengembalikan total penjumlahan info dari semua elemen */
+    int total = 0;
+    address P = L.first;
+    while (P != nil) {
+        total += P -> info;
+        P = P -> next;
+    }
+    return total;
+}
+```
+
+### 2.3 Program main.cpp
+```cpp
+#include <iostream>
+#include "Singlylist.h"
+using namespace std;
+
+int main() {
+    // implementasi latihan no 2
+    List L;
+    address P1, P2, P3, P4, P5 = nil;
+    CreateList(L);
+    P1 = alokasi(2);
+    insertFirst(L,P1);
+    P2 = alokasi(0);
+    insertFirst(L,P2);
+    P3 = alokasi(8);
+    insertFirst(L,P3);
+    P4 = alokasi(12);
+    insertFirst(L,P4);
+    P5 = alokasi(9);
+    insertFirst(L,P5);
+    cout << "Hasil latihan 2: " << endl;
+    printInfo(L);
+
+    // implementasi latihan no 3
+    cout << "Hasil latihan 3: " << endl;
+    address P_cari = findElm(L, 8);
+    if (P_cari != nil) {
+        cout << P_cari -> info << " ditemukan dalam list." << endl;
+    }
+    else {
+        cout << "tidak ditemukan dalam list." << endl;
+    }
+    cout << endl;
+
+    // implementasi latihan no 4
+    cout << "Hasil latihan 4: " << endl;
+    int total = sumInfo(L);
+    cout << "Total penjumlahan elemen dalam list: " << total << endl;
+
+return 0;
+
+}
+```
+
+#### Output
+
+#### 1. Output 2
+<img width="572" height="259" alt="image" src="https://github.com/user-attachments/assets/eb92b28f-dcd3-47bd-9890-7cab5852c588" />
+
+#### 2. Output 3
+<img width="570" height="264" alt="image" src="https://github.com/user-attachments/assets/3aa915f9-fbf6-4736-8326-6110b8841235" />
+
+#### 3. output 4
+<img width="576" height="410" alt="image" src="https://github.com/user-attachments/assets/ddf05ce2-033e-490e-993e-33b4e5e9c5f0" />
+
+#### FULL CODE SCREENSHOT:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f91c0022-c0c4-4f36-bb17-3bae28d3d44a" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bfad9d55-9374-4466-8323-a3ae7528e0ff" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2767a62a-608d-4204-b411-eea69e375460" />
+
 
 
 
