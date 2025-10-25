@@ -433,36 +433,468 @@ int main(){
 ## Unguided 
 
 ### 1. Buat Program Kreatif, bebas Apa saja namun tidak data mahasiswa dan buah yang tadi
-[SS SOAL]
 
-### 1.1 Program .h
+### 1.1 Program eldenRing.h
 ```h
+#ifndef ERDTREE_LOG_H
+#define ERDTREE_LOG_H
+#define nil NULL
 
+#include <iostream>
+#include <string>
+using namespace std;
+
+// 1. definisi tipe data
+// ini kenangan yang disimpan di dalam log
+struct Memory {
+    string name; // nama kenangan (misal: "Messmer the impaler")
+    string type; // tipe(Boss, Lokasi, NPC)
+    string location; // Lokas ditemukannya 
+    int runeReward; // jumlah rune yang didapat
+};
+
+typedef Memory infotype;
+typedef struct Node *address;
+
+// 2. definisi Node dan List, gerbong
+struct Node {
+    infotype isiData; // isi data kenangan
+    address next; // pointer ke kenangan selanjutnya
+};
+struct LogList {
+    address first;
+};
+
+//3. berbagai fungsi dan prosedur pada singly linked list
+// prosedur dan fungsi utama
+void createLog(LogList &Log);
+address alokasiMemory(infotype data);
+void dealokasiMemory(address &P);
+void printLog(LogList Log);
+bool isEmpty(LogList Log);
+int nbList(LogList Log);
+
+// prosedur untuk menambahkan kenangan
+void insertMemoryFirst(LogList &Log, address P);
+void insertMemoryLast(LogList &Log, address P);
+void insertMemoryAfter(LogList &Log, address P, address Prev);
+
+// prosedur untuk menghapus kenangan
+void deleteMemoryFirst(LogList &Log);
+void deleteMemoryLast(LogList &Log);
+void deleteMemoryAfter(LogList &Log, address Prev);
+void deleteList(LogList &Log); // Hapus semua kenangan
+
+// prosedur untuk memperbarui kenangan
+void updateMemoryFirst(LogList &Log);
+void updateMemoryLast(LogList &Log);
+void updateMemoryAfter(LogList &Log, address Prev);
+
+// fungsi untuk mencari kenangan
+address findMemoryByName(LogList Log, string name);
+address findMemoryBefore(LogList Log, string name);
+void printMemoriesByType(LogList Log, string type);
+
+
+#endif //ERDTREE_LOG_H
 ```
 
-### 1.2 Singlylist.cpp
+### 1.2 eldenRing.cpp
 ```cpp
+#include "eldenRing.h"
+#include <iostream>
+using namespace std;
+
+void createLog(LogList &Log) {
+    Log.first = nil;
+}
+
+address alokasiMemory(infotype data) {
+    address P = new Node;
+    P -> isiData = data;
+    P -> next = nil;
+    return P;
+}
+
+void dealokasiMemory(address &P) {
+    delete P;
+}
+
+void printLog(LogList Log){
+    if (isEmpty(Log)) {
+        cout << "[...Log Kenangan kosong...]" << endl;
+    } else {
+        address P = Log.first;
+        int i = 1;
+        while (P != nil) {
+            cout << i << ". Nama     : " << P->isiData.name << endl;
+            cout << "   Tipe     : " << P->isiData.type << endl;
+            cout << "   Lokasi   : " << P->isiData.location << endl;
+            cout << "   Rune     : " << P->isiData.runeReward << endl << endl;
+            P = P->next;
+            i++;
+        }
+    }
+}
+
+bool isEmpty(LogList Log){
+    return Log.first == nil;
+}
+
+int nbList(LogList Log){
+    int count = 0;
+    address P = Log.first;
+    while (P != nil) {
+        count++;
+        P = P -> next;
+    }
+    return count;
+}
+
+// fungsi insert
+void insertMemoryFirst(LogList &Log, address P) {
+    P -> next = Log.first;
+    Log.first = P;
+}
+
+void insertMemoryLast(LogList &Log, address P) {
+    if (isEmpty(Log)){
+        Log.first = P;
+    } else {
+        address bantu = Log.first;
+        while (bantu->next != nil) {
+            bantu = bantu->next;
+     }
+    bantu -> next = P;   
+}
+}
+
+void insertMemoryAfter(LogList &Log, address P, address Prev) {
+    if (Prev != nil) {
+        P->next = Prev->next;
+        Prev->next = P;
+    } else {
+        cout << "[Gagal: Kenangan 'Sebelum' tidak ditemukan!]" << endl;
+    }
+}
+
+/*--- FUNGSI DELETE (MENGHAPUS KENANGAN) ---*/
+void deleteMemoryFirst(LogList &Log) {
+    if (!isEmpty(Log)) {
+        address P = Log.first;
+        Log.first = P->next;
+        dealokasiMemory(P);
+        cout << "[Kenangan pertama berhasil dihapus.]" << endl;
+    } else {
+        cout << "[Gagal: Log sudah kosong!]" << endl;
+    }
+}
+
+void deleteMemoryLast(LogList &Log) {
+    if (isEmpty(Log)) {
+        cout << "[Gagal: Log sudah kosong!]" << endl;
+        return;
+    }
+    
+    if (Log.first->next == nil) { // Jika cuma 1 kenangan
+        dealokasiMemory(Log.first);
+        Log.first = nil;
+    } else { // Jika > 1 kenangan
+        address P = Log.first;
+        address Prev = nil;
+        while (P->next != nil) {
+            Prev = P;
+            P = P->next;
+        }
+        // P = node terakhir, Prev = node kedua terakhir
+        Prev->next = nil;
+        dealokasiMemory(P);
+    }
+    cout << "[Kenangan terakhir berhasil dihapus.]" << endl;
+}
+
+void deleteMemoryAfter(LogList &Log, address Prev) {
+    if (Prev != nil && Prev->next != nil) {
+        address P = Prev->next; // P = node yang mau dihapus
+        Prev->next = P->next;
+        dealokasiMemory(P);
+        cout << "[Kenangan setelah '" << Prev->isiData.name << "' berhasil dihapus.]" << endl;
+    } else {
+        cout << "[Gagal: Tidak ada kenangan setelah '" << Prev->isiData.name << "'!]" << endl;
+    }
+}
+
+void deleteList(LogList &Log) {
+    address P = Log.first;
+    while (P != nil) {
+        address temp = P;
+        P = P->next;
+        dealokasiMemory(temp);
+    }
+    Log.first = nil;
+    cout << "[...Semua kenangan telah terhapus dari Log...]" << endl;
+}
+
+
+/*--- FUNGSI UPDATE (MENGUBAH KENANGAN) - MODUL 5 ---*/
+void updateMemoryFirst(LogList &Log) {
+    if (!isEmpty(Log)) {
+        cout << "--- Mengubah Kenangan Pertama ('" << Log.first->isiData.name << "') ---" << endl;
+        cout << "Nama baru: "; getline(cin >> ws, Log.first->isiData.name);
+        cout << "Tipe baru (Boss/Lokasi/NPC/Item): "; cin >> Log.first->isiData.type;
+        cout << "Lokasi baru: "; getline(cin >> ws, Log.first->isiData.location);
+        cout << "Rune baru: "; cin >> Log.first->isiData.runeReward;
+        cout << "[Kenangan pertama berhasil diupdate!]\n" << endl;
+    }
+}
+
+void updateMemoryLast(LogList &Log) {
+    if (!isEmpty(Log)) {
+        address P = Log.first;
+        while (P->next != nil) {
+            P = P->next;
+        }
+        cout << "--- Mengubah Kenangan Terakhir ('" << P->isiData.name << "') ---" << endl;
+        cout << "Nama baru: "; getline(cin >> ws, P->isiData.name);
+        cout << "Tipe baru (Boss/Lokasi/NPC/Item): "; cin >> P->isiData.type;
+        cout << "Lokasi baru: "; getline(cin >> ws, P->isiData.location);
+        cout << "Rune baru: "; cin >> P->isiData.runeReward;
+        cout << "[Kenangan terakhir berhasil diupdate!]\n" << endl;
+    }
+}
+
+void updateMemoryAfter(LogList &Log, address Prev) {
+    if (Prev != nil && Prev->next != nil) {
+        address P = Prev->next;
+        cout << "--- Mengubah Kenangan setelah '" << Prev->isiData.name << "' ---" << endl;
+        cout << "(Data lama: '" << P->isiData.name << "')" << endl;
+        cout << "Nama baru: "; getline(cin >> ws, P->isiData.name);
+        cout << "Tipe baru (Boss/Lokasi/NPC/Item): "; cin >> P->isiData.type;
+        cout << "Lokasi baru: "; getline(cin >> ws, P->isiData.location);
+        cout << "Rune baru: "; cin >> P->isiData.runeReward;
+        cout << "[Kenangan berhasil diupdate!]\n" << endl;
+    } else {
+        cout << "[Gagal: Tidak ada kenangan setelah '" << Prev->isiData.name << "'!]\n" << endl;
+    }
+}
+
+
+/*--- FUNGSI SEARCHING (MENCARI KENANGAN) - MODUL 5 ---*/
+address findMemoryByName(LogList Log, string name) {
+    address P = Log.first;
+    while (P != nil) {
+        if (P->isiData.name == name) {
+            return P;
+        }
+        P = P->next;
+    }
+    return nil; // Tidak ketemu
+}
+
+address findMemoryBefore(LogList Log, string name) {
+    if (isEmpty(Log) || Log.first->isiData.name == name) {
+        return nil; // Tidak ada node "before" jika list kosong atau datanya di node first
+    }
+    
+    address P = Log.first;
+    while (P->next != nil) {
+        if (P->next->isiData.name == name) {
+            return P; // P adalah node sebelum node yang dicari
+        }
+        P = P->next;
+    }
+    return nil; // Tidak ketemu
+}
+
+void printMemoriesByType(LogList Log, string type) {
+    bool found = false;
+    address P = Log.first;
+    cout << "--- Hasil Pencarian Kenangan Tipe: '" << type << "' ---" << endl;
+    while (P != nil) {
+        if (P->isiData.type == type) {
+            cout << " * " << P->isiData.name << " (di " << P->isiData.location << ")" << endl;
+            found = true;
+        }
+        P = P->next;
+    }
+    if (!found) {
+        cout << "[Tidak ada kenangan dengan tipe '" << type << "' ditemukan.]" << endl;
+    }
+    cout << endl;
+}
+
 
 ```
 
 ### 1.3 Program main.cpp
 ```cpp
+#include "eldenRing.h"
+#include <iostream>
+#include <limits> // Perlu untuk pressEnter
+#include <string>
+using namespace std;
 
+// Fungsi helper untuk jeda (sudah diperbaiki)
+void pressEnter() {
+    cout << "\n...Tekan Enter untuk melanjutkan perjalanan..." << endl;
+    // Membersihkan buffer input sebelum cin.get()
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.get();
+}
+
+int main() {
+    LogList LogTarnished; 
+    createLog(LogTarnished);
+    address P, Prev; 
+
+    cout << "=================================================" << endl;
+    cout << "       CATATAN PERJALANAN DI LAND OF SHADOW      " << endl;
+    cout << "=================================================\n" << endl;
+
+    // === TAHAP 1: INSERT (Menemukan Kenangan) ===
+    cout << "--- TAHAP 1: MENAMBAH KENANGAN (INSERT) ---\n" << endl;
+    cout << "Log Awal:" << endl;
+    printLog(LogTarnished); // Mencetak "[...Log Kenangan kosong...]"
+
+    cout << "\nAKSI: insertMemoryFirst(\"Scadutree Fragment\")" << endl;
+    P = alokasiMemory({"Scadutree Fragment", "Item", "Gravesite Plain", 0});
+    insertMemoryFirst(LogTarnished, P);
+
+    cout << "\nAKSI: insertMemoryLast(\"Divine Beast Dancing Lion\")" << endl;
+    P = alokasiMemory({"Divine Beast Dancing Lion", "Boss", "Belurat", 80000});
+    insertMemoryLast(LogTarnished, P);
+
+    cout << "\nAKSI: insertMemoryLast(\"Rellana, Twin Moon Knight\")" << endl;
+    P = alokasiMemory({"Rellana, Twin Moon Knight", "Boss", "Shadow Keep", 120000});
+    insertMemoryLast(LogTarnished, P);
+    
+    cout << "\nAKSI: insertMemoryAfter(..., \"Miquella's Cross\", ...setelah \"Divine Beast\")" << endl;
+    Prev = findMemoryByName(LogTarnished, "Divine Beast Dancing Lion");
+    P = alokasiMemory({"Miquella's Cross", "NPC", "Scadutree Base", 0});
+    insertMemoryAfter(LogTarnished, P, Prev);
+    printLog(LogTarnished); // Langsung cetak hasilnya
+
+    cout << "\n--- TAHAP 1 SELESAI ---" << endl;
+    cout << "Total Kenangan: " << nbList(LogTarnished) << endl;
+    pressEnter();
+
+    // === TAHAP 2: UPDATE (Mengkoreksi Kenangan) ===
+    cout << "=================================================" << endl;
+    cout << "       TAHAP 2: MENGUBAH KENANGAN (UPDATE)     " << endl;
+    cout << "=================================================\n" << endl;
+    
+    cout << "AKSI: updateMemoryFirst() pada \"Scadutree Fragment\"..." << endl;
+    updateMemoryFirst(LogTarnished); // Ini akan interaktif meminta input baru
+
+    cout << "AKSI: updateMemoryLast() pada \"Rellana\"..." << endl;
+    updateMemoryLast(LogTarnished); // Ini akan interaktif meminta input baru
+
+
+    cout << "\nAKSI: updateMemoryAfter() pada node setelah \"Miquella's Cross\"..." << endl;
+    Prev = findMemoryByName(LogTarnished, "Miquella's Cross"); 
+    updateMemoryAfter(LogTarnished, Prev); // akan mengupdate "Rellana"
+    printLog(LogTarnished); // Langsung cetak hasilnya
+    
+    
+    cout << "\n--- TAHAP 2 SELESAI ---" << endl;
+    pressEnter();
+
+    // === TAHAP 3: SEARCHING (Mengingat Kembali) ===
+    cout << "=================================================" << endl;
+    cout << "       TAHAP 3: MENCARI KENANGAN (SEARCH)      " << endl;
+    cout << "=================================================\n" << endl;
+
+    cout << "AKSI: printMemoriesByType(\"Boss\")" << endl;
+    printMemoriesByType(LogTarnished, "Boss");
+
+    cout << "\nAKSI: findMemoryByName(\"Messmer the Impaler\")" << endl;
+    P = findMemoryByName(LogTarnished, "Messmer the Impaler");
+    if (P == nil) {
+        cout << "[Kenangan 'Messmer the Impaler' belum ditemukan...]\n" << endl;
+    } else {
+        cout << "[Ya, kenangan 'Messmer' ada di Log.]\n" << endl;
+    }
+    
+    cout << "\n--- TAHAP 3 SELESAI ---" << endl;
+    pressEnter();
+
+    // === TAHAP 4: DELETE (Melupakan Kenangan) ===
+    cout << "=================================================" << endl;
+    cout << "       TAHAP 4: MENGHAPUS KENANGAN (DELETE)    " << endl;
+    cout << "=================================================\n" << endl;
+    cout << "Kondisi List Awal (setelah di-update):" << endl;
+    printLog(LogTarnished);
+
+    cout << "\nAKSI: deleteMemoryFirst()" << endl;
+    deleteMemoryFirst(LogTarnished);
+    printLog(LogTarnished); // Langsung cetak hasilnya
+
+    cout << "\nAKSI: deleteMemoryLast()" << endl;
+    deleteMemoryLast(LogTarnished);
+    printLog(LogTarnished); // Langsung cetak hasilnya
+
+    cout << "\nAKSI: deleteMemoryAfter(..., ...setelah \"Divine Beast\")" << endl;
+    Prev = findMemoryByName(LogTarnished, "Divine Beast Dancing Lion"); 
+    deleteMemoryAfter(LogTarnished, Prev); // Hapus "Miquella's Cross"
+    printLog(LogTarnished); // Langsung cetak hasilnya
+
+    cout << "\n--- TAHAP 4 SELESAI ---" << endl;
+    cout << "Total Kenangan Tersisa: " << nbList(LogTarnished) << endl;
+    pressEnter();
+
+    // === TAHAP 5: CLEANUP (Akhir Perjalanan) ===
+    cout << "=================================================" << endl;
+    cout << "       TAHAP 5: MENGHAPUS SEMUA (DELETELIST)   " << endl;
+    cout << "=================================================\n" << endl;
+    
+    cout << "AKSI: deleteList()" << endl;
+    deleteList(LogTarnished);
+    printLog(LogTarnished);
+    cout << "Total Kenangan Tersisa: " << nbList(LogTarnished) << endl;
+
+    cout << "\n=================================================" << endl;
+    cout << "            SHADOW OF THE ERDTREE - END            " << endl;
+    cout << "=================================================" << endl;
+
+    return 0;
+}
 ```
 
 #### Output:
-[SS OUTPUT]
+#### 1. tahapan insert hasil
+<img width="1170" height="823" alt="image" src="https://github.com/user-attachments/assets/59eadb94-cddf-4554-a684-f85083875825" />
 
-[PENJELASAN PROGRAM]
+#### 2. Tahapan update 
+<img width="1184" height="741" alt="image" src="https://github.com/user-attachments/assets/11360c96-8b7a-42ab-a96a-59b4c425737a" />
+
+#### 3. tahapan searching
+<img width="1170" height="823" alt="image" src="https://github.com/user-attachments/assets/af2a7c71-57b7-4b99-b600-abba7bc95f62" />
+
+#### 4. Tahapan Deleate
+<img width="1170" height="823" alt="image" src="https://github.com/user-attachments/assets/8909e040-a20a-484e-a2f0-8773aa4f4a00" />
+<img width="1170" height="823" alt="image" src="https://github.com/user-attachments/assets/d8c17bb5-2b50-4832-9923-3624e5663118" />
+<img width="1170" height="823" alt="image" src="https://github.com/user-attachments/assets/bc9bb0f1-e76d-4afa-a421-e88f9ef93adc" />
 
 #### Full code screenshot:
 #### 1. FULL BAGIAN .h
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/51c8dc0a-6d00-4cfd-90d2-2b3789fb4a39" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e0b20d5a-0fa8-43bf-a27a-791992663d40" />
+
 
    
 #### 2. FULL BAGIAN .cpp
-  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1ce212f9-3b13-42f7-807b-5180790a4f5e" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fc82b5bf-1aab-43ad-9dd9-60bd100c7bc7" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ebeef109-75e5-44ac-a13b-bb6b2b9052e8" />
+
    
 #### 3. FULL BAGIAN main.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/61fc7b15-4ac8-46ed-b157-c4d769438d0b" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/be325df7-085b-452b-b1d1-d1a541cd8d94" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/edd088f2-7ff0-4222-8260-77bc008f40bf" />
+
+
+
 
 
 
