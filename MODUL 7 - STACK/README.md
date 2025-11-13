@@ -6,6 +6,7 @@
 Stack merupakan salah satu benuk sruktur daa dimana prinsip operasi yang digunakan seperti tumpukan. Seperti halnya tumpukan, elemen yang bisa diambil terlebuh dahulu adalah elemen yang paling atas. Stack menganut prinsip LIFO (Last-in First-Out) yang sudah dijelaskan seperti sebelumnya. Memang seperti Single linked list namun stack memiliki aturan ketat yang berbeda seperti SLL bisa menambah elemen dimana saja, kalau stack penyisipan (push/mendorong) dan penghapusan(pop) hanya boleh dilakukan pada satu ujung yaitu TOP (bagian paling atas)
 
 Berikut ini komponen-komponen stack:
+
 <img width="689" height="214" alt="image" src="https://github.com/user-attachments/assets/2dbc713f-52f3-4696-a0aa-8b4ce48295cb" />
 
 <ol>
@@ -927,13 +928,13 @@ Untuk soal no 2, masih menggunakan codingan dari soal no 1 karena ini merupakan 
 
 #### Screenshot program
 
-#### 1. code stack.h
+#### 2.1. code stack.h
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a4e4f46f-e849-4adf-b898-f26a240f4703" />
 
-#### 2. code stack.cpp
+#### 2.2. code stack.cpp
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ca4a03c6-aed1-4015-968c-ee4eb56dead2" />
 
-#### 3. code main.cpp
+#### 2.3. code main.cpp
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f8ebff4c-2062-411a-a7bd-be2197698552" />
 
 
@@ -1226,19 +1227,22 @@ int main() {
 #### Output
 <img width="1565" height="589" alt="image" src="https://github.com/user-attachments/assets/0d08df9c-f57c-4688-a552-003a2b857043" />
 
+Pada latihan 3, menambahkan prosedur getInputStream(Stack &S). Prosedur ini ditambahkan ke file stack.h (sebagai prototype) dan stack.cpp (sebagai implementasi). Logika utamanya adalah membaca input dari keyboard secara per karakter menggunakan cin.get() dalam sebuah loop while.
+
+Loop ini akan terus berjalan, mengambil setiap karakter ('4', '7', '2', dst.)  hingga user menekan tombol Enter (karakter \n). Setiap karakter angka yang valid dikonversi menjadi int (misal, '4' menjadi 4) dan di-Push ke dalam stack. Karena Push menerapkan LIFO (Last In First Out), input 4729601 menghasilkan stack dengan urutan [TOP] 1 0 6 9 2 7 4. File main.cpp diubah untuk memanggil getInputStream(S) dan memverifikasi hasilny
 
 
 #### Screenshoot code
 
-#### 1. code stack.h
+#### 3.1 code stack.h
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c800d526-a378-49d3-a498-bc957b1eb600" />
 
-#### 2. code stack.cpp
+#### 3.2 code stack.cpp
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6a9e3cfd-3d14-48ed-8958-e0d5649db9fd" />
 
 
 
-#### 3. code main.cpp
+#### 3.3 code main.cpp
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/cd1bab45-b97b-4cc4-8456-337f44581009" />
 
 
