@@ -2,10 +2,67 @@
 <p align="center">RYAN MUHAMAD SAPUTRA</p>
 
 ## Dasar Teori
-[PENJELASAN]
+## STACK Representasi List
+Stack merupakan salah satu benuk sruktur daa dimana prinsip operasi yang digunakan seperti tumpukan. Seperti halnya tumpukan, elemen yang bisa diambil terlebuh dahulu adalah elemen yang paling atas. Stack menganut prinsip LIFO (Last-in First-Out) yang sudah dijelaskan seperti sebelumnya. Memang seperti Single linked list namun stack memiliki aturan ketat yang berbeda seperti SLL bisa menambah elemen dimana saja, kalau stack penyisipan (push/mendorong) dan penghapusan(pop) hanya boleh dilakukan pada satu ujung yaitu TOP (bagian paling atas)
+
+Berikut ini komponen-komponen stack:
+<img width="689" height="214" alt="image" src="https://github.com/user-attachments/assets/2dbc713f-52f3-4696-a0aa-8b4ce48295cb" />
+
+<ol>
+    <li>
+        <code>TOP</code>, ini bagian paling atas untuk elemen stack.
+    </li>
+    <li>
+        <code>INFO</code>, isi data dari stack.
+    </li>
+    <li>
+        <code>NEXT</code>, merupakan pointer yang digunakan untuk menyambungkan elemen terakhir sisip dengan elemen sebelumnya.
+    </li>
+</ol>
+Pada gambar tersebut bisa dilihat bahwa Elemen 3 merupakan elemen pertama yang disisip, kemudian elemen 2, dan seterusnya, ini juga sama menganut FILO(Firs-in Last-out). Kemudian ada beberapa operasi-operasi stack sesuai dengan aturan yang ketat dan berbeda dengan SLL yang memiliki banyak operasi:
+<ol>
+    <li>
+        <code>Operasi Push</code>, ini merupakan penyisipan elemen-elemen pada tumpukan data. Fungsi ini sama seperti insertFirst pada list biasa.
+    </li>
+        <img width="600" height="175" alt="image" src="https://github.com/user-attachments/assets/11dc2c18-54e5-413a-9bf5-d9e1b2e066bb" />
+    <li>
+        <code>Operasi Pop</code>, merupakan operasi pengambilan data dalam list. Operasi ini hampir mirip dengan deleteFirst dala list linear, karena elemen pertama yang  pertama kali akan di akses adalah elemen paling atas atau elemen awal saja.
+    </li>
+    <img width="580" height="97" alt="image" src="https://github.com/user-attachments/assets/ced9309f-57df-47de-bb02-d35d180794bf" />
+</ol>
+
+Kemudian pembahasan selanjutnya mengenai primitif-primitif yang ada dalam stack, sama seperti dasarnya pada list lainnya, namun primitif stack lebih sedikin karena dalam stack hanya melakukan operasi-operasi terhadap elemen paling atas(TOP).
+<ol>
+    <li>
+        createStack()
+    </li>
+    <li>
+        isEmpty()
+    </li>
+    <li>
+        alokasi()
+    </li>
+    <li>
+        dealokasi()
+    </li>
+    <li>
+        Fungsi-fungsi pencarian
+    </li>
+    <li>
+        dan fungsi primitif lainnya
+    </li>
+</ol>
+
+## Stack representasi Array
+Pada prinsinpnya, representasi menggunakan tabel atau array sama halnya menggunakan poiner, perbedaannya yaitu terletak pada pendeklarasian struktur datanya. Mneggunakan array berindeks dan jumlah tumpukan yang terbatas.
+
+<img width="547" height="151" alt="image" src="https://github.com/user-attachments/assets/720616a7-b8da-46a4-9ba0-ff59668ee96a" />
+
+Operasi-operasi stack tabel atau array masih sama pada dasarnya yaiu Push(penyisipan) dan Pop(pengambilan data atau hapus)
 
 
 ## Guided 
+
 
 ## 1. Stack Versi Linked List
 ## 1.1 stack.h
@@ -16,7 +73,7 @@
 using namespace std;
 #define Nil NULL
 
-typedef struct node *address;
+typedef struct node* address;
 struct node {
     int dataAngka;
     address next;   
@@ -35,7 +92,7 @@ void push(stack &listStack, address nodeBaru);
 void pop(stack &listStack);
 void update(stack &listStack, int posisi);
 void view(stack listStack);
-void search(stack listStack, int angka);
+void searchData(stack listStack, int angka);
 
 #endif
 ```
@@ -84,8 +141,10 @@ void pop(stack &listStack){
         nodeHapus = listStack.top;
         listStack.top = listStack.top->next;
         nodeHapus->next = Nil;
+
+        int dataYangdiHapus = nodeHapus -> dataAngka;
         dealokasi(nodeHapus);
-        cout << "node " <<  nodeHapus->dataAngka << " berhasil dihapus dari stack!" << endl;
+        cout << "node " <<  dataYangdiHapus << " berhasil dihapus dari stack!" << endl;
     }
 }
 
@@ -207,12 +266,24 @@ int main(){
     view(listStack);
     cout << endl;
 
-    search(listStack, 4);
-    search(listStack, 9);
+    searchData(listStack, 4);
+    searchData(listStack, 9);
 
     return 0;
 }
 ```
+Program di atas merupakan cara merepresentasikan Stack dalam bentuk ADT atau abstract data type. Untuk itu buat 3 file seperti biasa:
+<ol>
+    <li>
+        <code>stack.h</code>, merupakan ADT yang menyimpan sruct node, struct stack, dan function ataupun prosedur primitif lainnya. Pada kode ini memiliki function dan prosedur seperti <code>isEmpty, createStack, alokasi, dealokasi, push, pop, update, view, searchData</code>
+    </li>
+    <li>
+        <code>stack.cpp</code>, disini tempat mengimplementasikan semua function dan prosedur.
+    </li>
+    <li>
+        <code>main.cpp</code>, ini merupakan program main atau utama yang nantinya seluruh function ataupun prosedur di running disini
+    </li>
+</ol>
 
 
 ## 2. Stack Versi Array 
@@ -392,33 +463,225 @@ int main(){
     return 0;
 }
 ```
+Sama seperti no 1 sebelumnya, yang menjadi beda ialah stack ini menggunakan representasi Array bukan list, yang dimana array penggunaannya sangat terbatas karena harus dideklarassikan terlebih dahulu berapa ukuran tumpukan(node) pada stack tersebut. Program ini juga memiliki 3 file yaitu:
+<ol>
+    <li>
+        <code>stack.h</code>, ini berisi deklarasi struct-struct dan juga function ataupun prosedur primitif sama seperti no 1 sebelummya.
+    </li>
+    <li>
+        <code>stack.cpp</code>, berisi implementasi dari function ataupun prosedur yang sudah di deklarasikan di file .h.
+    </li>
+    <li>
+        <code>main.cpp</code>, merupakan program utaman yang nantinya digunakan untuk menjalankan program stack array ADT ini.
+    </li>
+</ol>
 
 
 ## Unguided 
 
-### 1. Soal Pertama, buatlah ADT Stack array
+### 1. Soal Pertama, buatlah ADT Stack array, namun ada modifikasi kreatif
 <img width="574" height="531" alt="image" src="https://github.com/user-attachments/assets/fe5a1cf0-4e1d-497d-b25f-0b1fa172c0d2" />
 
-### 1.1 .h
+### 1.1 stack.h
 ```h
+#ifndef STACK
+#define STACK
+#define nil NULL
 
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+const int MAX_SLOTS = 20; //max kapasitas tas atau lebih tepat array
+struct Item {
+    string nama; 
+    int id;
+};
+typedef Item infotype; // infotype sekarang adalah struct dari item
+struct Stack {
+    infotype info[MAX_SLOTS]; // array berisi 20 jumlahnya
+    int top; //tumpukan atas atau top
+};
+
+// buat fungsi atau prosedur primitif sesuai soal yang ada
+void CreateStack(Stack &S); 
+void Push(Stack &S, infotype x);
+infotype pop(Stack &S);
+void printInfo(Stack S);
+void balikStack(Stack &S);
+
+// tambah bagian ini opsional namun penting
+bool isEmpty(Stack S);
+bool isFull(Stack S);
+infotype createItem(string nama, int id);
+
+#endif
 ```
 
-### 1.2 .cpp
+### 1.2 stack.cpp
 ```cpp
+#include "stack.h"
+#include <iostream>
+using namespace std;
 
+// implementasi berbagai function or prosedur tadi
+bool isEmpty(Stack S) {
+    return S.top == -1;
+};
+bool isFull(Stack S) {
+    return S.top == MAX_SLOTS -1;
+};
+infotype createItem(string nama, int id) {
+    Item newItem;
+    newItem.nama = nama;
+    newItem.id = id;
+    return newItem;
+}
+
+// implementasi 
+void CreateStack(Stack &S) {
+    S.top = -1; //terbentuk stack kosong dengan top = -1
+}
+
+void Push(Stack &S, infotype x) {
+    //cek apakah sudah penuh atau belum 
+    if (isFull(S)) {
+        cout << "Tas penuh! tidak bisa menambah item" << endl;
+    } else { // kondisi jika belum penuh
+        S.top++;// naikan top 
+        S.info[S.top] = x; // tambah item atau isi di posisi top baru
+    }
+}
+
+infotype pop(Stack &S) {
+    if (isEmpty(S)) {
+        cout << "Tas kosong, tidak ada yang bisa di ambil" << endl;
+        return {"Error", -1};
+    } else {
+        infotype itemDiambil = S.info[S.top]; // ambil item di top atas
+        S.top--; //kurangi top ke bawah
+        return itemDiambil; // kembalikan item
+    }
+}
+
+void printInfo(Stack S) {
+    cout << "[TOP] -> ";
+    if (isEmpty(S)) {
+        cout << "Kosong" << endl;
+    } else {
+        for (int i = S.top; i >= 0; i--) { // Mulai ambil dari top atas kemudian kurangi ke bawah hingga 0
+            cout << "(" << S.info[i].id << ": " << S.info[i].nama << ") ->"; 
+        }
+        cout << "[BOTTOM]" << endl;
+    }
+}
+
+void balikStack(Stack &S) {
+    // butuh tas cadangan untuk membalik stack dari bawah ke top
+    Stack tempStack;
+    CreateStack(tempStack);
+
+    // pindahkan item semua dari S ke tempstack, otomatis akan membalik urutan
+    while (!isEmpty(S)) {
+        Push(tempStack, pop(S));
+    }
+    S = tempStack;
+}
 ```
 
-### 1.3 Program main.cpp
+### 1.3 main.cpp
 ```cpp
+#include "stack.h"
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "petualangan baru dimulai!! membuat tas kosong" << endl;
+    Stack tasPlayer;
+    CreateStack(tasPlayer);
+    infotype itemYangDiPop; //digunakan sebagai penampung item yang dibuang
+
+    cout << "Menumukan health potion (ID:3)" << endl;
+    // digunakan untuk push elemen(S, 3);
+    Push(tasPlayer, createItem("Health Potion", 3));
+
+    // push (S, 4;)
+    cout << "Menemukan Mana Potion (ID:4)" << endl;
+    Push(tasPlayer, createItem("Mana Potion", 4));
+    
+    // Push(S, 8);
+    cout << "Menemukan Iron Sword (ID:8)" << endl;
+    Push(tasPlayer, createItem("Iron Sword", 8));
+    
+    // pop(S);
+    itemYangDiPop = pop(tasPlayer);
+    cout << "Membuang item teratas: " << itemYangDiPop.nama << endl;
+    
+    // Push(S, 2);
+    cout << "Menemukan Leather Shield (ID:2)" << endl;
+    Push(tasPlayer, createItem("Leather Shield", 2));
+    
+    // Push(S, 3);
+    cout << "Menemukan Health Potion lagi (ID:3)" << endl;
+    Push(tasPlayer, createItem("Health Potion", 3));
+    
+    // pop(S);
+    itemYangDiPop = pop(tasPlayer);
+    cout << "Membuang item teratas: " << itemYangDiPop.nama << endl;
+
+    // Push(S, 9);
+    cout << "Menemukan Golden Rune (ID:9)" << endl;
+    Push(tasPlayer, createItem("Golden Rune", 9));
+
+    // printInfo(S);
+    cout << "\n--- Isi Tas Saat Ini ---" << endl;
+    printInfo(tasPlayer);
+    
+    // cout<<"balik stack"<<endl;
+    cout << "\n...Tasnya tumpah! Isinya terbalik!..." << endl;
+    
+    // balikStack(S);
+    balikStack(tasPlayer);
+    
+    // printInfo(S);
+    cout << "--- Isi Tas Setelah Dibalik ---" << endl;
+    printInfo(tasPlayer);
+
+    return 0;
+}
 
 ```
 
 #### Output:
+<img width="1567" height="425" alt="image" src="https://github.com/user-attachments/assets/045e79ff-85fe-4b76-b4ad-2474c891d6c1" />
+
+Pada soal 1, disuruh mengimplementasikan ADT Stack menggunakan representasi array(tabel) sesuai dengan modul.
+<ol>
+    <li>
+        <code>stack.h</code>, mendefinisikan struct stack dan juga fungsi-fungsi ataupun prosedur primitif seperti <code>CreateStack, Push, pop, printInfo, balikStack, isEmpty, isFull, createItem</code>
+    </li>
+    <li>
+        <code>stack.cpp</code>, berguna untuk mengimplementasikan setiap fungsi-fungsi yang ada
+    </li>
+    <li>
+        <code>main.cpp</code>, program main ini mensimulasikan alur LIFO (Last In First Out) sesuai soal . Dengan melakukan serangkaian Push dan pop untuk memverifikasi bahwa item yang terakhir masuk (Push(S, 9)) adalah yang berada di [TOP], menghasilkan output [TOP] 9 2 4 3. Terakhir,  memanggil balikStack yang menghasilkan output terbalik, [TOP] 3 4 2 9
+    </li>
+</ol>
 
 
 #### Full code screenshot:
 
+#### 1. code stack.h
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d783affc-ee0d-484a-89fa-4395b8c64893" />
+
+#### 2. code stack.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f9953515-8638-41d8-b81a-79951712ad2c" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/28727c5a-20a4-4027-80aa-4fe8aa8263ba" />
+
+#### 3. code main.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/86cda8e6-b7a9-435a-a8fc-9c25d256a2c5" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0786fe5c-1848-4b89-a90b-d62f9d16c966" />
 
 
 
@@ -428,42 +691,555 @@ int main(){
 <img width="625" height="512" alt="image" src="https://github.com/user-attachments/assets/64e278d6-6f78-4231-bd8f-9f93e93ca55b" />
 
 
-### 2.1 .h
+### 2.1 stack.h
 ```h
+#ifndef STACK
+#define STACK
+#define nil NULL
 
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+const int MAX_SLOTS = 20; //max kapasitas tas atau lebih tepat array
+struct Item {
+    string nama; 
+    int id;
+};
+typedef Item infotype; // infotype sekarang adalah struct dari item
+struct Stack {
+    infotype info[MAX_SLOTS]; // array berisi 20 jumlahnya
+    int top; //tumpukan atas atau top
+};
+
+// buat fungsi atau prosedur primitif sesuai soal yang ada
+void CreateStack(Stack &S); 
+void Push(Stack &S, infotype x);
+infotype pop(Stack &S);
+void printInfo(Stack S);
+void balikStack(Stack &S);
+
+// tambah bagian ini opsional namun penting
+bool isEmpty(Stack S);
+bool isFull(Stack S);
+infotype createItem(string nama, int id);
+
+//ini untuk soal no 2
+void pushAscending(Stack &S, infotype x);
+
+#endif
 ```
 
-### 2.2 Program .cpp
+### 2.2 Program stack.cpp
 ```cpp
+#include "stack.h"
+#include <iostream>
+using namespace std;
 
+// implementasi berbagai function or prosedur tadi
+bool isEmpty(Stack S) {
+    return S.top == -1;
+};
+bool isFull(Stack S) {
+    return S.top == MAX_SLOTS -1;
+};
+infotype createItem(string nama, int id) {
+    Item newItem;
+    newItem.nama = nama;
+    newItem.id = id;
+    return newItem;
+}
+
+// implementasi 
+void CreateStack(Stack &S) {
+    S.top = -1; //terbentuk stack kosong dengan top = -1
+}
+
+void Push(Stack &S, infotype x) {
+    //cek apakah sudah penuh atau belum 
+    if (isFull(S)) {
+        cout << "Tas penuh! tidak bisa menambah item" << endl;
+    } else { // kondisi jika belum penuh
+        S.top++;// naikan top 
+        S.info[S.top] = x; // tambah item atau isi di posisi top baru
+    }
+}
+
+infotype pop(Stack &S) {
+    if (isEmpty(S)) {
+        cout << "Tas kosong, tidak ada yang bisa di ambil" << endl;
+        return {"Error", -1};
+    } else {
+        infotype itemDiambil = S.info[S.top]; // ambil item di top atas
+        S.top--; //kurangi top ke bawah
+        return itemDiambil; // kembalikan item
+    }
+}
+
+void printInfo(Stack S) {
+    cout << "[TOP] -> ";
+    if (isEmpty(S)) {
+        cout << "Kosong" << endl;
+    } else {
+        for (int i = S.top; i >= 0; i--) { // Mulai ambil dari top atas kemudian kurangi ke bawah hingga 0
+            cout << "(" << S.info[i].id << ": " << S.info[i].nama << ") ->"; 
+        }
+        cout << "[BOTTOM]" << endl;
+    }
+}
+
+void balikStack(Stack &S) {
+    // butuh tas cadangan untuk membalik stack dari bawah ke top
+    Stack tempStack;
+    CreateStack(tempStack);
+
+    // pindahkan item semua dari S ke tempstack, otomatis akan membalik urutan
+    while (!isEmpty(S)) {
+        Push(tempStack, pop(S));
+    }
+    S = tempStack;
+}
+
+// untuk soal no 2
+void pushAscending(Stack &S, infotype x) {
+    // buat tas sementara
+    Stack Temp;
+    CreateStack(Temp);
+
+    // selama isi atau S tidak kosong dan TOP > ID item baru,, Logika pengurutan (Descending)
+    while (!isEmpty(S) && S.info[S.top].id > x.id) {
+        // Pindahkan item yg lebih besar ke stack sementara
+        Push(Temp, pop(S));
+    }
+    
+    // Masukkan item baru (x) di posisi yang tepat
+    Push(S, x);
+    
+    // Kembalikan semua item dari stack sementara
+    while (!isEmpty(Temp)) {
+        Push(S, pop(Temp));
+    }
+}
 ```
 
 ### 2.3 Program main.cpp
 ```cpp
+#include "stack.h"
+#include <iostream>
+using namespace std;
+
+int main() {
+    //===ini soal no 1===
+    // cout << "petualangan baru dimulai!! membuat tas kosong" << endl;
+    // Stack tasPlayer;
+    // CreateStack(tasPlayer);
+    // infotype itemYangDiPop; //digunakan sebagai penampung item yang dibuang
+
+    // cout << "Menumukan health potion (ID:3)" << endl;
+    // // digunakan untuk push elemen(S, 3);
+    // Push(tasPlayer, createItem("Health Potion", 3));
+
+    // // push (S, 4;)
+    // cout << "Menemukan Mana Potion (ID:4)" << endl;
+    // Push(tasPlayer, createItem("Mana Potion", 4));
+    
+    // // Push(S, 8);
+    // cout << "Menemukan Iron Sword (ID:8)" << endl;
+    // Push(tasPlayer, createItem("Iron Sword", 8));
+    
+    // // pop(S);
+    // itemYangDiPop = pop(tasPlayer);
+    // cout << "Membuang item teratas: " << itemYangDiPop.nama << endl;
+    
+    // // Push(S, 2);
+    // cout << "Menemukan Leather Shield (ID:2)" << endl;
+    // Push(tasPlayer, createItem("Leather Shield", 2));
+    
+    // // Push(S, 3);
+    // cout << "Menemukan Health Potion lagi (ID:3)" << endl;
+    // Push(tasPlayer, createItem("Health Potion", 3));
+    
+    // // pop(S);
+    // itemYangDiPop = pop(tasPlayer);
+    // cout << "Membuang item teratas: " << itemYangDiPop.nama << endl;
+
+    // // Push(S, 9);
+    // cout << "Menemukan Golden Rune (ID:9)" << endl;
+    // Push(tasPlayer, createItem("Golden Rune", 9));
+
+    // // printInfo(S);
+    // cout << "\n--- Isi Tas Saat Ini ---" << endl;
+    // printInfo(tasPlayer);
+    
+    // // cout<<"balik stack"<<endl;
+    // cout << "\n...Tasnya tumpah! Isinya terbalik!..." << endl;
+    
+    // // balikStack(S);
+    // balikStack(tasPlayer);
+    
+    // // printInfo(S);
+    // cout << "--- Isi Tas Setelah Dibalik ---" << endl;
+    // printInfo(tasPlayer);
+
+    //====Ini soal no 2=====
+    cout << "Hello world!" << endl;
+    Stack S;
+    CreateStack(S);
+
+    //  pakai 'createItem' untuk mencocokkan logic soal dengan infotype 'Item' kita
+    // pushAscending(S, 3);
+    pushAscending(S, createItem("Health Potion", 3));
+    // pushAscending(S, 4);
+    pushAscending(S, createItem("Mana Potion", 4));
+    // pushAscending(S, 8);
+    pushAscending(S, createItem("Iron Sword", 8));
+    // pushAscending(S, 2);
+    pushAscending(S, createItem("Leather Shield", 2));
+    // pushAscending(S, 3);
+    pushAscending(S, createItem("Health Potion", 3)); // Ini ID 3 yang kedua
+    // pushAscending(S, 9);
+    pushAscending(S, createItem("Golden Rune", 9));
+
+    // printInfo(S);
+    cout << "--- Isi Tas (Harusnya 9 8 4 3 3 2) ---" << endl;
+    printInfo(S);
+
+    // cout<<"balik stack"<<endl;
+    cout << "\nbalik stack" << endl;
+
+    // balikStack(S);
+    balikStack(S);
+
+    // printInfo(S);
+    cout << "--- Isi Tas Setelah Dibalik (Harusnya 2 3 3 4 8 9) ---" << endl;
+    printInfo(S);
+
+    return 0;
+}
 
 ```
 
 #### Output
+<img width="1682" height="579" alt="image" src="https://github.com/user-attachments/assets/9bfc45b6-8e43-4ed4-8be3-7a067f565f1e" />
+
+Untuk soal no 2, masih menggunakan codingan dari soal no 1 karena ini merupakan lanjutan, hanya saja tambahkan <code>pushAscending</code> pada file .h kemudian implementasikan di file <code>stack.cpp</code>, yang nantinya pada main.cpp atau program utama akan mengeksekusi operasi push ascending tersebut.
+
+#### Screenshot program
+
+#### 1. code stack.h
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a4e4f46f-e849-4adf-b898-f26a240f4703" />
+
+#### 2. code stack.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ca4a03c6-aed1-4015-968c-ee4eb56dead2" />
+
+#### 3. code main.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f8ebff4c-2062-411a-a7bd-be2197698552" />
+
+
+
+
 
 ### 3. Lanjutan dari soal no 2, tambahkan prosedur sesuai ketentuan soal
 <img width="584" height="285" alt="image" src="https://github.com/user-attachments/assets/334b589f-4980-44f3-a56d-75eadbed2a82" />
 
-### 3.1 .h
+### 3.1 stack.h
 ```h
+#ifndef STACK
+#define STACK
+#define nil NULL
 
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+const int MAX_SLOTS = 20; //max kapasitas tas atau lebih tepat array
+struct Item {
+    string nama; 
+    int id;
+};
+typedef Item infotype; // infotype sekarang adalah struct dari item
+struct Stack {
+    infotype info[MAX_SLOTS]; // array berisi 20 jumlahnya
+    int top; //tumpukan atas atau top
+};
+
+// buat fungsi atau prosedur primitif sesuai soal yang ada
+void CreateStack(Stack &S); 
+void Push(Stack &S, infotype x);
+infotype pop(Stack &S);
+void printInfo(Stack S);
+void balikStack(Stack &S);
+
+// tambah bagian ini opsional namun penting
+bool isEmpty(Stack S);
+bool isFull(Stack S);
+infotype createItem(string nama, int id);
+
+//ini untuk soal no 2
+void pushAscending(Stack &S, infotype x);
+
+// tambahan baru untuk soal no 3
+void getInputStream(Stack &S);
+
+#endif
 ```
 
-### 3.2 Program .cpp
+### 3.2 stack.cpp
 ```cpp
+#include "stack.h"
+#include <iostream>
+using namespace std;
 
+// implementasi berbagai function or prosedur tadi
+bool isEmpty(Stack S) {
+    return S.top == -1;
+};
+bool isFull(Stack S) {
+    return S.top == MAX_SLOTS -1;
+};
+infotype createItem(string nama, int id) {
+    Item newItem;
+    newItem.nama = nama;
+    newItem.id = id;
+    return newItem;
+}
+
+// implementasi 
+void CreateStack(Stack &S) {
+    S.top = -1; //terbentuk stack kosong dengan top = -1
+}
+
+void Push(Stack &S, infotype x) {
+    //cek apakah sudah penuh atau belum 
+    if (isFull(S)) {
+        cout << "Tas penuh! tidak bisa menambah item" << endl;
+    } else { // kondisi jika belum penuh
+        S.top++;// naikan top 
+        S.info[S.top] = x; // tambah item atau isi di posisi top baru
+    }
+}
+
+infotype pop(Stack &S) {
+    if (isEmpty(S)) {
+        cout << "Tas kosong, tidak ada yang bisa di ambil" << endl;
+        return {"Error", -1};
+    } else {
+        infotype itemDiambil = S.info[S.top]; // ambil item di top atas
+        S.top--; //kurangi top ke bawah
+        return itemDiambil; // kembalikan item
+    }
+}
+
+void printInfo(Stack S) {
+    cout << "[TOP] -> ";
+    if (isEmpty(S)) {
+        cout << "Kosong" << endl;
+    } else {
+        for (int i = S.top; i >= 0; i--) { // Mulai ambil dari top atas kemudian kurangi ke bawah hingga 0
+            cout << "(" << S.info[i].id << ": " << S.info[i].nama << ") ->"; 
+        }
+        cout << "[BOTTOM]" << endl;
+    }
+}
+
+void balikStack(Stack &S) {
+    // butuh tas cadangan untuk membalik stack dari bawah ke top
+    Stack tempStack;
+    CreateStack(tempStack);
+
+    // pindahkan item semua dari S ke tempstack, otomatis akan membalik urutan
+    while (!isEmpty(S)) {
+        Push(tempStack, pop(S));
+    }
+    S = tempStack;
+}
+
+// untuk soal no 2
+void pushAscending(Stack &S, infotype x) {
+    // buat tas sementara
+    Stack Temp;
+    CreateStack(Temp);
+
+    // selama isi atau S tidak kosong dan TOP > ID item baru,, Logika pengurutan (Descending)
+    while (!isEmpty(S) && S.info[S.top].id > x.id) {
+        // Pindahkan item yg lebih besar ke stack sementara
+        Push(Temp, pop(S));
+    }
+    
+    // Masukkan item baru (x) di posisi yang tepat
+    Push(S, x);
+    
+    // Kembalikan semua item dari stack sementara
+    while (!isEmpty(Temp)) {
+        Push(S, pop(Temp));
+    }
+}
+
+// untuk soal 3
+void getInputStream(Stack &S) {
+    cout << "Masukkan ID Item (angka 0-9), tekan Enter jika selesai:" << endl;
+    
+    char c; // Penampung karakter
+    
+    // Loop ini akan terus jalan, mengambil 1 KARAKTER setiap kalinya  Sampai karakter yang diambil adalah '\n'
+    while ( (c = cin.get()) != '\n' ) {
+        
+        // Cek apakah karakter itu adalah angka (bukan spasi/huruf)
+        if (c >= '0' && c <= '9') {
+            
+            // 1. Ubah karakter '4' menjadi angka 4
+            int id_num = c - '0'; 
+            
+            // 2. Buat nama item otomatis (biar kreatif)
+            string item_name = "Rune Fragment " + to_string(id_num); 
+            
+            // 3. Push item ini ke stack
+            Push(S, createItem(item_name, id_num));
+            cout << "  -> Menambahkan (" << id_num << ": " << item_name << ") ke tas." << endl;
+        }
+        // Jika user ngetik spasi atau huruf, abaikan saja
+    }
+    cout << "[Input selesai!]" << endl;
+}
 ```
 
-### 3.3 Program main.cpp
+### 3.3 main.cpp
 ```cpp
+#include "stack.h"
+#include <iostream>
+using namespace std;
+
+int main() {
+    //===ini soal no 1===
+    // cout << "petualangan baru dimulai!! membuat tas kosong" << endl;
+    // Stack tasPlayer;
+    // CreateStack(tasPlayer);
+    // infotype itemYangDiPop; //digunakan sebagai penampung item yang dibuang
+
+    // cout << "Menumukan health potion (ID:3)" << endl;
+    // // digunakan untuk push elemen(S, 3);
+    // Push(tasPlayer, createItem("Health Potion", 3));
+
+    // // push (S, 4;)
+    // cout << "Menemukan Mana Potion (ID:4)" << endl;
+    // Push(tasPlayer, createItem("Mana Potion", 4));
+    
+    // // Push(S, 8);
+    // cout << "Menemukan Iron Sword (ID:8)" << endl;
+    // Push(tasPlayer, createItem("Iron Sword", 8));
+    
+    // // pop(S);
+    // itemYangDiPop = pop(tasPlayer);
+    // cout << "Membuang item teratas: " << itemYangDiPop.nama << endl;
+    
+    // // Push(S, 2);
+    // cout << "Menemukan Leather Shield (ID:2)" << endl;
+    // Push(tasPlayer, createItem("Leather Shield", 2));
+    
+    // // Push(S, 3);
+    // cout << "Menemukan Health Potion lagi (ID:3)" << endl;
+    // Push(tasPlayer, createItem("Health Potion", 3));
+    
+    // // pop(S);
+    // itemYangDiPop = pop(tasPlayer);
+    // cout << "Membuang item teratas: " << itemYangDiPop.nama << endl;
+
+    // // Push(S, 9);
+    // cout << "Menemukan Golden Rune (ID:9)" << endl;
+    // Push(tasPlayer, createItem("Golden Rune", 9));
+
+    // // printInfo(S);
+    // cout << "\n--- Isi Tas Saat Ini ---" << endl;
+    // printInfo(tasPlayer);
+    
+    // // cout<<"balik stack"<<endl;
+    // cout << "\n...Tasnya tumpah! Isinya terbalik!..." << endl;
+    
+    // // balikStack(S);
+    // balikStack(tasPlayer);
+    
+    // // printInfo(S);
+    // cout << "--- Isi Tas Setelah Dibalik ---" << endl;
+    // printInfo(tasPlayer);
+
+    // //====Ini soal no 2=====
+    // cout << "Hello world!" << endl;
+    // Stack S;
+    // CreateStack(S);
+
+    // //  pakai 'createItem' untuk mencocokkan logic soal dengan infotype 'Item' kita
+    // // pushAscending(S, 3);
+    // pushAscending(S, createItem("Health Potion", 3));
+    // // pushAscending(S, 4);
+    // pushAscending(S, createItem("Mana Potion", 4));
+    // // pushAscending(S, 8);
+    // pushAscending(S, createItem("Iron Sword", 8));
+    // // pushAscending(S, 2);
+    // pushAscending(S, createItem("Leather Shield", 2));
+    // // pushAscending(S, 3);
+    // pushAscending(S, createItem("Health Potion", 3)); // Ini ID 3 yang kedua
+    // // pushAscending(S, 9);
+    // pushAscending(S, createItem("Golden Rune", 9));
+
+    // // printInfo(S);
+    // cout << "--- Isi Tas (Harusnya 9 8 4 3 3 2) ---" << endl;
+    // printInfo(S);
+
+    // // cout<<"balik stack"<<endl;
+    // cout << "\nbalik stack" << endl;
+
+    // // balikStack(S);
+    // balikStack(S);
+
+    // // printInfo(S);
+    // cout << "--- Isi Tas Setelah Dibalik (Harusnya 2 3 3 4 8 9) ---" << endl;
+    // printInfo(S);
+
+    //========== untuk soal 3===========
+    cout << "Hello world!" << endl;
+    Stack S;
+    CreateStack(S);
+
+    // Panggil fungsi baru kita
+    getInputStream(S);
+
+    // printInfo(S);
+    cout << "\n--- Isi Tas Saat Ini ---" << endl;
+    printInfo(S);
+    
+    // cout<<"balik stack"<<endl;
+    cout << "\nbalik stack" << endl;
+    
+    // balikStack(S);
+    balikStack(S);
+    
+    // printInfo(S);
+    cout << "--- Isi Tas Setelah Dibalik ---" << endl;
+    printInfo(S);
+    return 0;
+}
 
 ```
 
 #### Output
+<img width="1565" height="589" alt="image" src="https://github.com/user-attachments/assets/0d08df9c-f57c-4688-a552-003a2b857043" />
+
+
+
+#### Screenshoot code
+
+#### 1. code stack.h
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c800d526-a378-49d3-a498-bc957b1eb600" />
+
+#### 2. code stack.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6a9e3cfd-3d14-48ed-8958-e0d5649db9fd" />
+
+
+
+#### 3. code main.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/cd1bab45-b97b-4cc4-8456-337f44581009" />
 
 
 
@@ -473,7 +1249,17 @@ int main(){
 
 
 ## Kesimpulan
+Pada praktikum Modul 7, saya berhasil memahami bagaimana cara mengimplemenasikan struktur data stack atau tumpukan. Ada 2 cara stack bagaimana cara merepresentasikannya:
+<ol>
+    <li>
+        Representasi pointer, ini seperti SLL namun TOP adalah first.
+    </li>
+    <li>
+        Representasi array atau tabel. menggunakan array statis dan penanda indeks top.
+    </li>
+</ol>
 
+Intinya praktikum kali ini difokuskan pada implementasi bagaimana cara menerapkan stack dengan konsep LIFO (Last-in First-out) atau FILO(First-in Last-out). Selain itu juga saya belajar dan memahami bagaiaman operasi-operasi yang ada pada stack, baik menggunakan Stack list ataupun stack array(tabel). Dengan adanya latihan modul mampu meningkatkan pemahaman lebih mendalam lagi terkait stack(tumpukan).
 
 
 
