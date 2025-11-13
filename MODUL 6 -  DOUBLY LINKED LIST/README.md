@@ -386,7 +386,7 @@ CONTOH OUTPUTNYA
 <img width="386" height="320" alt="image" src="https://github.com/user-attachments/assets/55793e67-b561-41a2-b25c-406fdefaf171" />
 
 
-### 1.1 .h
+### 1.1 Doublylist.h
 ```h
 #ifndef DOUBLYLIST_H
 #define DOUBLYLIST_H
@@ -575,7 +575,9 @@ int main()
 
 #### Output:
 <img width="1628" height="749" alt="image" src="https://github.com/user-attachments/assets/1e0ea886-daa6-42e5-9b3c-9a456f32323c" />
+Untuk kode di atas atau soal pertama, kita diminta untuk membuat DLL atau Doubly linked list dengan menggunakan ADT. Pada file <code>Doublylist.h</code> akan menyimpan definisi tipe ADT yang dimana berisi struct kendaraan yang nantinya digunakan sebagai variabel infotype dan juga mendeklarasikan <code>ElmList</code> yang merupakan node dan isinya ada info(isi data), next(pointer kedepan), prev(pointer mundur ke belakang). Kemudian tambah struct <code>List</code> yang digunakan untuk First dan last(ini akan berguna untuk searching, insert, dan delete). Setelah itu definisikan juga fungsi dan prosedur primitif yang nantinya akan diimplementasikan pada <code>Doublylist.cpp</code> yang dimana terdiri dari <code>CreateList, alokasi, printInfo, insertLast, InsertFirst, dan FindElmByNopol</code>
 
+Selanjutnyaa buat file Doublylist.cpp untuk mengimplementasikan fungsi ataupun prosedur dan main program nantinya akan menjadi program utama dalama menjalankan seluruh operasi pada Doubly Linked List.
 
 
 #### Full code screenshot:
@@ -846,6 +848,7 @@ int main() {
 
 #### Output
 <img width="1544" height="877" alt="image" src="https://github.com/user-attachments/assets/d9e233dc-62a5-464c-971b-9162227d0dc2" />
+Untuk soal bagian kedua sama kodenya seperti nomor satu, bedanya kita ditugaskan untuk mencari elemen dengan nomor polisi D001 dan membuat fungsi baru yaitu <code>findElm</code> yang digunakan untuk melakukan pencarian data tertentu pada suatu node, nantinya output akan menampilkan hasil yang sesuai jika nomor polisi yang dicari benar dan jika tidak ada, outputnya akan menampilkan bahwa nomor polisi yang dicari tidak ada. Sama seperti sebelumnya buat adt function terlebih dahulu fi <code>Doublylist.h</code> kemudian implementasikan di <code>Doublylist.cpp</code> yang nantinya akan di jalankan oleh program main.cpp.
 
 
 #### Full Code Screenshot
@@ -1199,6 +1202,8 @@ int main() {
 #### Output
 
 <img width="1303" height="480" alt="image" src="https://github.com/user-attachments/assets/8423ce09-0e59-4c6e-a62b-7a440e0db66e" />
+
+Soal bagian 3 masih menggunakan kode lanjutan dari no 1-2 yang dimana sebelumnya sudah melakukan <code>Insert dan Searching</code>, kali ini akan dilakukan delete dengan membuat prosedur <code>deleteFIrst, deleteLast, deleteAfter</code>. Tujuannya adalah pengguna bisa menginputkan node mana yang ingin dihapus dan program akan menentukan akan menggunakan jenis penghapusan yang mana sesuai dengan letak node yang ada, jika list kosong maka tidak akan adanya penghapusan.
 
 
 #### Full Code Screenshot
