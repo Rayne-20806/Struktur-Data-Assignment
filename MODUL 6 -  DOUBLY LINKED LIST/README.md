@@ -91,6 +91,7 @@ int main() {
     return 0; 
 }
 ```
+Kode di atas merupakan bagaimana cara kita mengimplementasikan Doubly linked list(DLL) dalam C++. Pada dasarnya, DLL sama seperti SLL atau _Singly linked list_ namun yang berbeda adalah disini pada <code>struct elmList {infotype info; address next; address prev (BARU)</code> dan <code>struct List{ address first; address last(baru, karena DLL ada tambahan last juga);</code>. Kemudian pada DLL insert ini memiliki berbagai fungsi dan prosedur seperti <code>void insertFirst(List &L, address P)</code> yang digunakan untuk menambahkan elemen atau node pertama, <code>void insertLast(List &L, address P)</code> yang digunakan untuk menambahkan node bagian akhir, <code>void insertAfter(List &L, address P, address R)</code> yang digunakan untuk menambah node setelah elemen tertentu setelah R, <code>address alokasi(infotype x)</code> yang digunakan untuk membuat elemen atau node baru, dan <code>PrintInfo()</code> digunakan untuk menampilkan hasil DLL yang sudah kita buat. Pada func main kita akan menlakukan operasi-operasi dari function di atas.
 
 ## 2. Doubly Linked List Delete
 ```cpp
@@ -160,8 +161,10 @@ int main() {
     return 0; 
 }
 ```
+Penjelasan sama seperti di atas, bedanya dari namanya saja karena DLL lebih berfokus untuk melakukan operasi hapus atau delete. Terdapat <code>dealokasi</code> yang digunakan untuk mengosongkan memori elemen, <code>deleteFirst(), deleteLast(), deleteAfter()</code> yang masing masing digunakan untuk menghapus elemen atau node awal, node bagian akhir, node setelah elemen tertentu. Pada program mainnya juga sama kita akan memanggil function-function tadi untuk melakukan operasi penghapusan.
 
 ## 3. Tambahan untuk versi ADT
+
 ### 1.1 dll.h
 ```h
 #ifndef DLL_INCLUDED
@@ -204,6 +207,8 @@ void printInfo(List L);
 
 #endif
 ```
+
+Kode di atas merupakan file .h yang menggunakan tipe ADT, jadi file .h ini hanya akan berisi mendefinisikan tipe ADT seperti <code>struct</code> dan deklarasikan primitif function dan prosedur. Fungsi-Fungsi nya merupakan gabungan dari DLL Insert dan juga DLL Delete.
 
 ### 1.2 dll.cpp
 ```cpp
@@ -273,6 +278,7 @@ void printInfo(List L) { // Definisikan fungsi printInfo untuk mencetak isi list
     cout << endl; 
 }
 ```
+Pada program dll.cpp kita akan menginclude terlebih dahulu <code>dll.h</code> kemudian kita membuat function dan isi dari function-function atau prosedur tersebut.
 
 
 ### 1.3 main.cpp
@@ -310,6 +316,7 @@ int main() {
     return 0; 
 }
 ```
+Ini merupakan program main atau utama untuk menjalankan atau testing dari dll.h, dll.cpp, dan main.cpp. Karena kita menggunakan ADT atau _Abstract data type_ maka jangan lupa untuk include <code>dll.h</code>
 
 
 ## Unguided 
@@ -324,6 +331,42 @@ CONTOH OUTPUTNYA
 
 ### 1.1 .h
 ```h
+#ifndef DOUBLYLIST_H
+#define DOUBLYLIST_H
+#include <iostream>
+using namespace std;
+#include <string>
+
+
+// 1. definisi tipe data ADT
+typedef struct ElmList *address; // pointer ke elemen list
+struct kendaraan { // info kendaraan
+    string nopol;
+    string warna;
+    int thnBuat;
+};
+
+typedef kendaraan infotype; 
+struct ElmList {
+    infotype info;
+    address next; // pointer ke elemen berikutnya
+    address prev; // pointer ke elemen sebelumnya
+};
+
+struct List {
+    address first; // pointer ke elemen pertama
+    address last; // pointer ke elemen terakhir
+};
+
+// 2. definisi fungsi-fungsi dan prosedur primitif
+void createList(List &L);
+address alokasi(infotype x);
+void dealokasi(address &P);
+void printInfo(List L);
+void insertLast(List &L, address P);
+
+
+#endif // DOUBLYLIST_H
 
 ```
 
