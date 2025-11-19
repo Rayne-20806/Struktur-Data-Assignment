@@ -3,7 +3,7 @@
 
 ## Dasar Teori
 ## STACK Representasi List
-Stack merupakan salah satu benuk sruktur daa dimana prinsip operasi yang digunakan seperti tumpukan. Seperti halnya tumpukan, elemen yang bisa diambil terlebuh dahulu adalah elemen yang paling atas. Stack menganut prinsip LIFO (Last-in First-Out) yang sudah dijelaskan seperti sebelumnya. Memang seperti Single linked list namun stack memiliki aturan ketat yang berbeda seperti SLL bisa menambah elemen dimana saja, kalau stack penyisipan (push/mendorong) dan penghapusan(pop) hanya boleh dilakukan pada satu ujung yaitu TOP (bagian paling atas)
+Stack merupakan salah satu bentuk sruktur data dimana prinsip operasi yang digunakan seperti tumpukan. Seperti halnya tumpukan, elemen yang bisa diambil terlebih dahulu adalah elemen yang paling atas. Stack menganut prinsip LIFO (Last-in First-Out) yang sudah dijelaskan seperti sebelumnya. Memang seperti Single linked list namun stack memiliki aturan ketat yang berbeda seperti SLL bisa menambah elemen dimana saja, kalau stack penyisipan (push/mendorong) dan penghapusan(pop) hanya boleh dilakukan pada satu ujung yaitu TOP (bagian paling atas)
 
 Berikut ini komponen-komponen stack:
 
