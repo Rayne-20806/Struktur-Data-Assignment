@@ -2,6 +2,7 @@
 <p align="center">RYAN MUHAMAD SAPUTRA</p>
 
 ## Dasar Teori
+### QUEUE Representasi dengan List
 Dibaca kyu, merupakan struktur data yang dapat dikatakan seperti sebuah antrean. Misalkan antrean pada loket pembelian tiket kereta api. Orang yang akan mendapatkan pelayanan yang pertama adalah orang pertamakali masuk dalam antrean tersebut dan yang terakhir masuk dia akan mendapatkan layanan yang terakhir pula. Jadi prinsip dasar dalam Queue adalah FIFO (First in Fisrt out), proses yang pertama masuk akan diakses terlebih dahulu. Dalam pengimplementasian struktur Queue dalam C dapat menggunakan tipe data array dan linked list.
 
 Berikut contoh gambar struktur Queue dalam Linked List
@@ -23,6 +24,14 @@ Operasi Queue memiliki dua operasi utama yaitu operasi penyisipan (Insert/Enqueu
   <img width="849" height="176" alt="image" src="https://github.com/user-attachments/assets/3da847a8-d2dc-45dd-8179-49b809d2b9c8" />
   
 </ol>
+
+### QUEUE Representasi Tabel
+Pada dasarnya representasi queue menggunakan tabel sama halnya dengan menggunakan pointer. Perbedaan yang mendasar adalah pada management memori serta keterbatasan jumlah antreannya. Berikut perbedaan antara tabel dan pointer :
+
+<img width="785" height="117" alt="image" src="https://github.com/user-attachments/assets/a7b843be-2bae-403e-8419-044629aeccbc" />
+
+<img width="911" height="432" alt="image" src="https://github.com/user-attachments/assets/323c33d5-8825-4028-ba0b-7c3b3dfd0a3e" />
+
 
 
 
