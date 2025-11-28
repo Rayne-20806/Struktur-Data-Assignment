@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul TREE (BAGIAN PERTAMA) (10)</h1>
+<h1 align="center">Laporan Praktikum Modul TREE (BAGIAN PERTAMA) (10)</h1>
 <p align="center">RYAN MUHAMAD SAPUTRA</p>
 
 ## Dasar Teori
@@ -60,7 +60,7 @@ Berikut ini anatomi dari suatu Tree:
 <img width="803" height="694" alt="image" src="https://github.com/user-attachments/assets/1bbccf7e-f90a-4755-a9cb-83b70934f24e" />
 
 ### 5. Jenis Jenis Tree.
-#### 1. Orderen Tree
+#### 1. Ordered Tree
 Yaitu pohon yang urutan anak-anaknya penting.
 
 <img width="424" height="310" alt="image" src="https://github.com/user-attachments/assets/85098a3b-6143-410f-b9cd-2263c15c2027" />
@@ -549,33 +549,333 @@ Berikut penjelasan singkat untuk file-file ADT pada Binary Search Tree ini:
 ## Unguided 
 
 ### 1. Soal Pertama
+<img width="622" height="612" alt="image" src="https://github.com/user-attachments/assets/920a71ae-c6dd-4911-b4b1-5742bf0add32" />
 
-
-
-### 1.1 .h
+### 1.1 bstree.h
 ```h
+#ifndef BSTREE_H
+#define BSTEE_H
+#include <iostream>
+using namespace std;
+#define Nil NULL
 
+// === SOAL NO 1 ===
+//Definisikan ADT untuk Binary Search Tree
+typedef int infotype;
+typedef struct Node *address;
+struct Node {
+    infotype info;
+    address left, right;
+};
+
+// deklarasikan fungsi-fungsi atau prosedur primitif
+address alokasi(infotype x);
+void insertNode(address &root, infotype x);
+address findNode(infotype x, address root);
+void printInorder(address root);
+
+
+
+#endif
 ```
 
-### 1.2 .cpp
+### 1.2 bstree.cpp
 ```cpp
+#include "bstree.h"
+using namespace std;
 
+// === SOAL NO 1===
+address alokasi(infotype x) {
+    address P = new Node;
+    P -> info = x;
+    P -> left = Nil;
+    P -> right = Nil;
+    return P;
+}
+
+void insertNode(address &root, infotype x) {
+    //jika tree kosong
+    if  (root == Nil) {
+        root = alokasi(x);
+    } else {
+        // jika tidak kosong, maka bandingkan nilai x
+        if (x < root -> info) {
+            insertNode(root -> left, x); // masuk ke subtree kiri
+        } else if (x > root -> info) {
+            insertNode(root -> right, x); // masuk ke subtree kanan
+        }
+        // jika x == root -> info maka idak lakukan apa-apa karena tidak ada duplikasi
+    }
+}
+
+// ini rekursif untuk mencari node dengan nilai x
+address findNode(infotype x, address root) {
+    // jika tree kosong
+    if (root == Nil) {
+        return Nil;
+    } 
+    if (root -> info == x) {
+        return root; //ketemu node dengan nilai x di root
+    }
+    // jika tidak ketemu, coba cari di kiri dan kanan
+    if (x < root -> info) {
+        return findNode(x, root -> left); // cari di bagian kiri
+    } else {
+        return findNode(x, root -> right); // cari dibagian kanan
+    }
+}
+
+//cetak isi InOrder
+void printInorder(address root) {
+    if (root != Nil) {
+        printInorder(root -> left);
+        cout << root -> info << " - ";
+        printInorder(root -> right);
+    }
+}
 ```
 
 ### 1.3 main.cpp
 ```cpp
+#include "bstree.h"
+using namespace std;
+
+int main() {
+    // === SOAL NO 1 ===
+    cout << "Hello World" << endl;
+    // digunakan untuk proses insert node ke BST
+    address root = Nil;
+    insertNode(root,1);
+    insertNode(root,2);
+    insertNode(root,6);
+    insertNode(root,4);
+    insertNode(root,5);
+    insertNode(root,3);
+    insertNode(root,6);// duplikat jadi tidak dimasukkan
+    insertNode(root,7);
+    // cetak isi atau menampilkan isi tree secara Inorder
+    printInorder(root);
+
+    cout << endl;
+    return 0;
+}
+```
+
+#### Output:
+<img width="1594" height="362" alt="image" src="https://github.com/user-attachments/assets/678cd303-59e8-4d48-9350-09c140a75156" />
+
+#### Full code screenshot:
+
+#### Code bstree.h
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3bc46596-4ba8-4530-948f-7c820520b372" />
+
+#### code bstree.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6d1859b1-e91d-42d2-a5d0-0f8d0d8d7853" />
+
+#### code main.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6f8c44de-ea2e-416d-9f99-d8fbf031238a" />
+
+
+
+
+### 2. Soal kedua
+<img width="694" height="771" alt="image" src="https://github.com/user-attachments/assets/56688816-08f2-41a9-a1b1-b1ef2e54d353" />
+
+### 2.1 bstree.h
+```h
+#ifndef BSTREE_H
+#define BSTEE_H
+#include <iostream>
+using namespace std;
+#define Nil NULL
+
+// === SOAL NO 1 ===
+//Definisikan ADT untuk Binary Search Tree
+typedef int infotype;
+typedef struct Node *address;
+struct Node {
+    infotype info;
+    address left, right;
+};
+
+// deklarasikan fungsi-fungsi atau prosedur primitif
+address alokasi(infotype x);
+void insertNode(address &root, infotype x);
+address findNode(infotype x, address root);
+void printInorder(address root);
+
+// === SOAL NO 2 ===
+int hitungJumlahNode(address root);
+int hitungTotalInfo(address root, int start);
+int hitungKedalaman(address root, int start);
+
+
+#endif
+```
+
+### 2.2 bstree.cpp
+```cpp
+#include "bstree.h"
+using namespace std;
+
+// === SOAL NO 1===
+address alokasi(infotype x) {
+    address P = new Node;
+    P -> info = x;
+    P -> left = Nil;
+    P -> right = Nil;
+    return P;
+}
+
+void insertNode(address &root, infotype x) {
+    //jika tree kosong
+    if  (root == Nil) {
+        root = alokasi(x);
+    } else {
+        // jika tidak kosong, maka bandingkan nilai x
+        if (x < root -> info) {
+            insertNode(root -> left, x); // masuk ke subtree kiri
+        } else if (x > root -> info) {
+            insertNode(root -> right, x); // masuk ke subtree kanan
+        }
+        // jika x == root -> info maka idak lakukan apa-apa karena tidak ada duplikasi
+    }
+}
+
+// ini rekursif untuk mencari node dengan nilai x
+address findNode(infotype x, address root) {
+    // jika tree kosong
+    if (root == Nil) {
+        return Nil;
+    } 
+    if (root -> info == x) {
+        return root; //ketemu node dengan nilai x di root
+    }
+    // jika tidak ketemu, coba cari di kiri dan kanan
+    if (x < root -> info) {
+        return findNode(x, root -> left); // cari di bagian kiri
+    } else {
+        return findNode(x, root -> right); // cari dibagian kanan
+    }
+}
+
+//cetak isi InOrder
+void printInorder(address root) {
+    if (root != Nil) {
+        printInorder(root -> left);
+        cout << root -> info << " - ";
+        printInorder(root -> right);
+    }
+}
+
+
+// === SOAL NO 2 === 
+int hitungJumlahNode(address root) {
+    // jika tree kosong
+    if (root == Nil) {
+        return 0; 
+    } 
+    return 1 + hitungJumlahNode(root ->left) + hitungJumlahNode(root -> right);
+}
+
+int hitungTotalInfo(address root, int start) {
+    // jika tree kosong
+    if (root == Nil ) {
+        return start; 
+    }
+    return  root -> info + hitungTotalInfo(root->left, 0) + hitungTotalInfo(root->right, 0);
+}
+
+int hitungKedalaman(address root, int start) {
+    if (root == Nil) {
+        return start; 
+    }
+    // Cari kedalaman maksimal antara kiri dan kanan
+    // start + 1 artinya turun satu level
+    int kedalamanKiri = hitungKedalaman(root->left, start + 1);
+    int kedalamanKanan = hitungKedalaman(root->right, start + 1);
+
+    if (kedalamanKiri > kedalamanKanan) {
+        return kedalamanKiri;
+    } else {
+        return kedalamanKanan;
+    }
+}
+```
+
+### 2.3 main.cpp
+```cpp
+#include "bstree.h"
+using namespace std;
+
+int main() {
+    // === SOAL NO 1 ===
+    cout << "Hello World" << endl;
+    // digunakan untuk proses insert node ke BST
+    address root = Nil;
+    insertNode(root,1);
+    insertNode(root,2);
+    insertNode(root,6);
+    insertNode(root,4);
+    insertNode(root,5);
+    insertNode(root,3);
+    insertNode(root,6);// duplikat jadi tidak dimasukkan
+    insertNode(root,7);
+    // cetak isi atau menampilkan isi tree secara Inorder
+    printInorder(root);
+
+    cout << endl;
+
+    // === SOAL NO 2 ===
+    cout<<"kedalaman : "<<hitungKedalaman(root,0)<<endl;
+    cout<<"jumlah Node : "<<hitungJumlahNode(root)<<endl;
+    cout<<"total : "<<hitungTotalInfo(root, 0)<<endl;
+    return 0;
+}
+```
+
+
+#### Output:
+<img width="1633" height="586" alt="image" src="https://github.com/user-attachments/assets/844025ab-2994-4eeb-8c99-14dcec9ae7ef" />
+
+
+#### Full code screenshot:
+
+#### Code bstree.h
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6aa40622-ba75-45d0-8bee-6f8ea23c5233" />
+
+
+#### code bstree.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9f9f787b-d9a5-434d-bec9-5590981d2f63" />
+
+
+#### code main.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/05019452-989f-4252-8630-d1822e6bc0e9" />
+
+
+
+
+### 3. Soal ketiga
+<img width="694" height="771" alt="image" src="https://github.com/user-attachments/assets/56688816-08f2-41a9-a1b1-b1ef2e54d353" />
+
+### 3.1 .h
+```h
+
+```
+
+### 3.2 .cpp
+```cpp
+
+```
+
+### 3.3 main.cpp
+```cpp
 
 
 ```
 
 
-
-
-
-
 #### Output:
-
-
 
 
 #### Full code screenshot:
@@ -587,6 +887,7 @@ Berikut penjelasan singkat untuk file-file ADT pada Binary Search Tree ini:
 
 
 #### code main.cpp
+
 
 
 
