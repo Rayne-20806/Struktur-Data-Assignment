@@ -10,7 +10,7 @@
 ## Guided 
 
 
-## 1. QUEUE Versi Linked List
+## 1. Binary Search Tree
 ## 1.1 bst.h
 ```h
 
