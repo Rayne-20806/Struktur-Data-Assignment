@@ -661,8 +661,23 @@ int main() {
 }
 ```
 
+
 #### Output:
 <img width="1594" height="362" alt="image" src="https://github.com/user-attachments/assets/678cd303-59e8-4d48-9350-09c140a75156" />
+
+Untuk soal pertama kita harus membuat ADT Binary Search Tree (BST) dengan menggunakan Linked List. Pertama kita akan pecah menjadi 3 file yaitu <code>bstree.h , bstree.cpp , main.cpp</code> seperti contoh pada guided juga.
+<ol>
+  <li>
+    <code>bstree.h</code>. Ini merupakan blueprint dari ADT nya, kita akan mendefinisikan tipe data ADT dan struct Node yang menyimpan info, left, dan right. Selanjutnya kita deklarasikan juga berbagai fungsi dan prosedur primitif yang nantinya akan berguna untuk BST seperti <code>alokasi, insertNode, findNode, printInorder</code>.
+  </li>
+
+  <li>
+    <code>bstree.cpp</code>. Ini merupakan file yang nantinya digunakan untuk implementasi berbagai fungsi dan prosedur yang sudah kita deklarasikan sebelumnya pada file bstree.h. Pada file ini terdapat operasi insertNode dan logikanya ialag jika angka kecil, akan masuk ke kiri atau left. Jika angka lebih besar, masuk kanan atau right. Jika ada angka yang sama atau duplikat, bisa kita abaikan. Operasi InOrder ini cara bacanya ialah Left - Middle - right.
+  </li>
+  <li>
+    <code>main.cpp</code>. Ini merupakan file yang digunakan untuk testing dari program BST yang sudah kita buat. Kita akan melakukan proses insertNode sesuai ketentuan yang ada di soal.
+  </li>
+</ol>
 
 #### Full code screenshot:
 
@@ -678,7 +693,7 @@ int main() {
 
 
 
-### 2. Soal kedua
+### 2. Soal kedua, Lanjutan dari nomor 1
 <img width="694" height="771" alt="image" src="https://github.com/user-attachments/assets/56688816-08f2-41a9-a1b1-b1ef2e54d353" />
 
 ### 2.1 bstree.h
@@ -835,9 +850,23 @@ int main() {
 ```
 
 
+
+
 #### Output:
 <img width="1633" height="586" alt="image" src="https://github.com/user-attachments/assets/844025ab-2994-4eeb-8c99-14dcec9ae7ef" />
 
+Untuk Soal ke-2 masih sama seperti nomor 1 untuk codingannya karena ini melanjutkan, bedanya kita akan menambahkan 3 fungsi baru untuk file <code>bstree.h dan bstree.cpp(implementasi fungsi dan prosedur)</code>sesuai ketentuan soal yaitu :
+<ol>
+  <li>
+    hitungJumlahNode: Ini digunakan untuk menghitung berapa banyak node pada Tree.
+  </li>
+  <li>
+    hitungTotalInfo: Ini digunakan untuk menjumlahkan semua angka di dalam pohon, contohnya : 1+2+6 dan seterusnya
+  </li>
+  <li>
+    hitungKedalaman: menghitung seberapa dalam pohonnya (tinggi).
+  </li>
+</ol>
 
 #### Full code screenshot:
 
@@ -856,55 +885,272 @@ int main() {
 
 
 ### 3. Soal ketiga
-<img width="694" height="771" alt="image" src="https://github.com/user-attachments/assets/56688816-08f2-41a9-a1b1-b1ef2e54d353" />
+<img width="512" height="331" alt="image" src="https://github.com/user-attachments/assets/fa8f8849-836b-4287-b34e-6609d13ae9e3" />
+
 
 ### 3.1 .h
 ```h
+#ifndef BSTREE_H
+#define BSTEE_H
+#include <iostream>
+using namespace std;
+#define Nil NULL
 
+// === SOAL NO 1 ===
+//Definisikan ADT untuk Binary Search Tree
+typedef int infotype;
+typedef struct Node *address;
+struct Node {
+    infotype info;
+    address left, right;
+};
+
+// deklarasikan fungsi-fungsi atau prosedur primitif
+address alokasi(infotype x);
+void insertNode(address &root, infotype x);
+address findNode(infotype x, address root);
+void printInorder(address root);
+
+// === SOAL NO 2 ===
+int hitungJumlahNode(address root);
+int hitungTotalInfo(address root, int start);
+int hitungKedalaman(address root, int start);
+
+// === SOAL NO 3 ===
+void preOrder(address root);
+void inOrder(address root);
+void postOrder(address root);
+
+
+#endif
 ```
 
 ### 3.2 .cpp
 ```cpp
+#include "bstree.h"
+using namespace std;
 
+// === SOAL NO 1===
+address alokasi(infotype x) {
+    address P = new Node;
+    P -> info = x;
+    P -> left = Nil;
+    P -> right = Nil;
+    return P;
+}
+
+void insertNode(address &root, infotype x) {
+    //jika tree kosong
+    if  (root == Nil) {
+        root = alokasi(x);
+    } else {
+        // jika tidak kosong, maka bandingkan nilai x
+        if (x < root -> info) {
+            insertNode(root -> left, x); // masuk ke subtree kiri
+        } else if (x > root -> info) {
+            insertNode(root -> right, x); // masuk ke subtree kanan
+        }
+        // jika x == root -> info maka idak lakukan apa-apa karena tidak ada duplikasi
+    }
+}
+
+// ini rekursif untuk mencari node dengan nilai x
+address findNode(infotype x, address root) {
+    // jika tree kosong
+    if (root == Nil) {
+        return Nil;
+    } 
+    if (root -> info == x) {
+        return root; //ketemu node dengan nilai x di root
+    }
+    // jika tidak ketemu, coba cari di kiri dan kanan
+    if (x < root -> info) {
+        return findNode(x, root -> left); // cari di bagian kiri
+    } else {
+        return findNode(x, root -> right); // cari dibagian kanan
+    }
+}
+
+//cetak isi InOrder
+void printInorder(address root) {
+    if (root != Nil) {
+        printInorder(root -> left);
+        cout << root -> info << " - ";
+        printInorder(root -> right);
+    }
+}
+
+
+// === SOAL NO 2 === 
+int hitungJumlahNode(address root) {
+    // jika tree kosong
+    if (root == Nil) {
+        return 0; 
+    } 
+    return 1 + hitungJumlahNode(root ->left) + hitungJumlahNode(root -> right);
+}
+
+int hitungTotalInfo(address root, int start) {
+    // jika tree kosong
+    if (root == Nil ) {
+        return start; 
+    }
+    return  root -> info + hitungTotalInfo(root->left, 0) + hitungTotalInfo(root->right, 0);
+}
+
+int hitungKedalaman(address root, int start) {
+    if (root == Nil) {
+        return start; 
+    }
+    // Cari kedalaman maksimal antara kiri dan kanan
+    // start + 1 artinya turun satu level
+    int kedalamanKiri = hitungKedalaman(root->left, start + 1);
+    int kedalamanKanan = hitungKedalaman(root->right, start + 1);
+
+    if (kedalamanKiri > kedalamanKanan) {
+        return kedalamanKiri;
+    } else {
+        return kedalamanKanan;
+    }
+}
+
+// === SOAL NO 3 ===
+void preOrder(address root) {
+    if(root != Nil) {
+        cout << root -> info << " - ";
+        preOrder(root -> left);
+        preOrder(root -> right);
+    }
+}
+
+void inOrder(address root) {
+    if (root != Nil) {
+        inOrder(root -> left);
+        cout << root -> info << " - ";
+        inOrder(root -> right);
+    }
+}
+
+void postOrder(address root) {
+    if (root != Nil) {
+        postOrder(root -> left);
+        postOrder(root -> right);
+        cout << root -> info << " - ";    }
+}
 ```
 
 ### 3.3 main.cpp
 ```cpp
+#include "bstree.h"
+using namespace std;
+
+int main() {
+    // // === SOAL NO 1 ===
+    // cout << "Hello World" << endl;
+    // // digunakan untuk proses insert node ke BST
+    // address root = Nil;
+    // insertNode(root,1);
+    // insertNode(root,2);
+    // insertNode(root,6);
+    // insertNode(root,4);
+    // insertNode(root,5);
+    // insertNode(root,3);
+    // insertNode(root,6);// duplikat jadi tidak dimasukkan
+    // insertNode(root,7);
+    // // cetak isi atau menampilkan isi tree secara Inorder
+    // printInorder(root);
+
+    // cout << endl;
+
+    // // === SOAL NO 2 ===
+    // cout<<"kedalaman : "<<hitungKedalaman(root,0)<<endl;
+    // cout<<"jumlah Node : "<<hitungJumlahNode(root)<<endl;
+    // cout<<"total : "<<hitungTotalInfo(root, 0)<<endl;
+
+    // === SOAL NO 3 ===
+    address root = Nil;
+    // root node
+    insertNode(root, 6);
+    // level 1, left and right
+    insertNode(root, 4);
+    insertNode(root, 7);
+    // level 2, dibawah 4, left and right
+    insertNode(root, 2);
+    insertNode(root,5);
+    // level 3, dibawah 2, left and right
+    insertNode(root, 1);
+    insertNode(root, 3);
+
+    cout << "\nTree telah dibuat sesuai dengan gambar soal"<< endl;
+
+    // 1. PreOrder (MIDDLE, LEFT, RIGHT Cara bacanya)
+    cout << "PreOrder: ";
+    preOrder(root);
+    cout << endl;
+
+    // 2. InOrder (LEFT, MIDDLE, RIGHT Cara bacanya)
+    cout << "InOrder: ";
+    inOrder(root);
+    cout << endl;
+
+    // 3. PostOrder (LEFT, RIGHT, MIDDLE Cara bacanya)
+    cout << "PostOrder: ";
+    postOrder(root);
+    cout << endl;
 
 
+    return 0;
+}
 ```
 
 
 #### Output:
+<img width="1615" height="485" alt="image" src="https://github.com/user-attachments/assets/37fe4f50-6219-4478-99fe-96725c49f08e" />
 
+Untuk soal ke-3, kita diminta untuk melakukan Print tree secara pre-order dan post-order, namun saya juga mencoba secara In order juga. Pada program kali ini merupakan pencarian dari suatu node dan akan mencetak sesuai dengan ketentuan. 
+<ol>
+  <li>
+    Pre-Order: Algoritma ini akan mengunjungi suatu node dan mecetaknya sesuai urutan berikut ini Root/middle -> kiri/left -> kanan/right, maka output program tersebut adalah 6 - 4 - 2 - 1 - 3 - 5 - 7
+  </li>
+  <li>
+    Post-Order: Algoritma ini akan mengunjungi node dengan urutan kiri/left -> kanan/right -> root/middle. Jadi hasil atau output program tersebut adalah 1 - 3 - 2 - 5 - 4 - 7 - 6 menunjukkan bahwa root(6) akan diproses paling terakhir setelah semua anak-anaknya selesai dikunjungi
+  </li>
+  <li>
+    In-Order(tambahan): Algoritma ini akan mengunjungi node dengan urutan kiri/left -> middle/root -> kanan/right. Jadi hasil atau output program tersebut adalah 1 - 2 - 3 - 4 - 5 - 6 - 7 -
+  </li>
+</ol>
 
 #### Full code screenshot:
 
-#### Code .h
+#### Code bstree.h
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7c369de0-8867-4bbf-9a0b-cd3e69533c46" />
 
 
-#### code .cpp
+#### code bstree.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4919e7e2-a2f3-4dad-99d2-8e2710bd7ab9" />
 
 
 #### code main.cpp
-
-
-
-
-
-
-
-
-
-
-
-
-
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/820d024c-3cfe-4c7e-9100-8d377e826beb" />
 
 
 
 ## Kesimpulan
-
+Pada praktikum Modul 10 ini, saya telah mempelajari struktur data Tree, khususnya Binary Search Tree (BST), serta bagaimana penerapan konsep reekursf dalam memanipulasi struktur data non-linear.
+<ol>
+  <li>
+    Struktur Data Non-Linear: Berbeda dengan linked list atau stack yang linear, Tree mengorganisir data secara hierarkis dengan menggunakan Root, Parent, dan child.
+  </li>
+  <li>
+    Binary Search Tree (BST): Mengimplementasikan aturan BST dimana nilai node anak sebelah kiri selalu lebih kecil dari parent, dan anak sebelah kanan selalu lebih besar. Hal ini memungkinkan pencarian data yang lebih efisien dan mudah.
+  </li>
+  <li>
+    Rekursif: Operasi pada tree seperti insert, searching, dan traversal paling efektif dilakukan dengan menggunakan fungsi rekursif. Fungsi ini akan memanggil dirinya sendiri untuk menulusuri subtree kiri dan kanan sehingga mencapai kondisi berhenti (base/basis case) yaitu saat node bernilai nil.
+  </li>
+  <li>
+    Traversal: Pada praktikum kali ini saya mengimplementasikan tiga metode penulusuran dalam Binary Search Tree (BST): Pre-Order (MIDDLE -> LEFT -> RIGHT), In-Order (LEFT -> MIDDLE -> ROOT), Post-Order(LEFT -> RIGHT -> MIDDLE), serta menghitung kedalaman pohon atau tinggi pohon dan total data di dalamnya.
+  </li>
+</ol>
 
 
 
