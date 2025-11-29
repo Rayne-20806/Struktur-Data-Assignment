@@ -888,7 +888,7 @@ Untuk Soal ke-2 masih sama seperti nomor 1 untuk codingannya karena ini melanjut
 <img width="512" height="331" alt="image" src="https://github.com/user-attachments/assets/fa8f8849-836b-4287-b34e-6609d13ae9e3" />
 
 
-### 3.1 .h
+### 3.1 bstree.h
 ```h
 #ifndef BSTREE_H
 #define BSTEE_H
@@ -925,7 +925,7 @@ void postOrder(address root);
 #endif
 ```
 
-### 3.2 .cpp
+### 3.2 bstree.cpp
 ```cpp
 #include "bstree.h"
 using namespace std;
