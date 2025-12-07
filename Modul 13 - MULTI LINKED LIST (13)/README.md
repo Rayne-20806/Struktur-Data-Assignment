@@ -1233,39 +1233,327 @@ Program ini dibuat dengan mengimplementasikan multi link list, kita disuruh untu
 <img width="889" height="623" alt="image" src="https://github.com/user-attachments/assets/bede812e-747a-49d2-b1f5-deccbd7e3518" />
 
 
-### 3.1 mll.h
+### 3.1 circularlist.h
 ```h
+#ifndef CIRCULARLIST_H
+#define CIRCULARLIST_H
+#include <iostream>
+using namespace std;
+#define nil NULL
 
+// definisi tipe data dan ADT untuk circular duoble linked list
+
+struct Mahasiswa {
+    string Nama;
+    string Nim;
+    char Jenis_Kelamin;
+    float IPK;
+};
+typedef Mahasiswa infotype;
+typedef struct ElmList *address;
+
+struct ElmList {
+    infotype info;
+    address next;
+};
+
+struct List {
+    address First;
+};
+
+// deklarsi fungsi atau prosedur primitif
+void CreateList(List &L);
+address alokasi(infotype x);
+void dealokasi(address P);
+
+void insertFirst(List &L, address P);
+void insertLast(List &L, address P);
+void insertAfter(List &L, address Prec, address P);
+
+void deleteFirst(List &L, address &P);
+void deleteLast(List &L, address &P);
+void deleteAfter(List &L, address Prec, address &P);
+
+// Pencarian berdasarkan NIM
+address findElm(List L, infotype x);
+
+void printInfo(List L);
+
+#endif
 ```
 
-### 3.2 mll.cpp
+### 3.2 circularlist.cpp
 ```cpp
+#include "circularlist.h"
+#include <iostream>
+using namespace std;
 
+// implementasi fungsi atau prosedur primitif untuk circular double link list
+void CreateList(List &L){
+    L.First = nil;
+}
+
+address alokasi(infotype x) {
+    // buat node baru kemudian isi info dengan x dan next dengan nil
+    address P = new ElmList;
+    P -> info = x;
+    P -> next = nil;
+    return P;
+}
+
+void dealokasi(address P) {
+    // hapus node yang ditunjuk P
+    delete P;
+}
+
+void insertFirst(List &L, address P) {
+    // jika list kosong
+    if (L.First == nil) {
+        L.First = P;
+        P -> next = P; // circular dan menunjuk ke dirinya sendiri
+    } else { // jika list tidak kosong
+        address Last = L.First;
+        // cari last node
+        while (Last -> next != L.First) {
+            Last = Last -> next;
+        }
+        P -> next = L.First;
+        Last -> next = P;
+        L.First = P;
+    }
+}
+
+void insertLast(List &L, address P) {
+    // jika list kosong
+    if (L.First == nil) {
+        insertFirst(L, P); 
+    } else {
+        // jika list tidak kosong
+        address Last = L.First;
+        // cari last node
+        while (Last -> next != L.First) {
+            Last = Last -> next;
+        }
+        Last -> next = P;
+        P -> next = L.First; // circular kembali ke first
+    }
+}
+
+void insertAfter(List &L, address Prec, address P){
+    if (Prec != nil) {
+        P->next = Prec->next;
+        Prec->next = P;
+    }
+}
+
+void deleteFirst(List &L, address &P){
+    if (L.First != nil) {
+        P = L.First;
+        // jika hanya ada satu elemen
+        if (P -> next == L.First) {
+            L.First = nil;
+        } else { 
+            // jika lebih dari satu elemen
+            address Last = L.First;
+            while (Last->next != L.First) {
+                Last = Last->next;
+            }
+            L.First = P->next;
+            Last->next = L.First;
+        }
+
+    }
+}
+
+
+
+void deleteLast(List &L, address &P){
+    // jika list tidak kosong
+    if (L.First != NULL) {
+        address Last = L.First;
+        address PrecLast = NULL;
+        
+        // Cari Last dan Sebelum Last (PrecLast)
+        while (Last->next != L.First) {
+            PrecLast = Last;
+            Last = Last->next;
+        }
+        
+        P = Last;
+        if (PrecLast == NULL) { // Jika cuma 1 elemen
+            L.First = NULL;
+        } else {
+            PrecLast->next = L.First;
+        }
+        P->next = NULL;
+    }
+}
+
+void deleteAfter(List &L, address Prec, address &P){
+    if (Prec != nil && Prec -> next != L.First) {
+        P = Prec -> next;
+        Prec -> next = P -> next;
+        P -> next = nil;
+    } else if (Prec != nil && Prec -> next == L.First) {
+        deleteFirst(L, P);
+    }
+}
+
+// Pencarian berdasarkan NIM
+address findElm(List L, infotype x){
+    if (L.First == nil) {
+        return nil;
+    } else {
+        address P = L.First;
+        do {
+            if (P -> info.Nim == x.Nim) {
+                return P;
+            }
+            P = P -> next;
+        } while (P != L.First);
+        return nil;
+    }
+}
+
+void printInfo(List L) {
+    if (L.First == NULL) {
+        cout << "List Kosong" << endl;
+    } else {
+        address P = L.First;
+        int i = 1;
+        do {
+            cout << "Data ke-" << i << endl;
+            cout << "Nama : " << P->info.Nama << endl;
+            cout << "NIM  : " << P->info.Nim << endl;
+            cout << "L/P  : " << P->info.Jenis_Kelamin << endl;
+            cout << "IPK  : " << P->info.IPK << endl;
+            cout << "--------------------" << endl;
+            P = P->next;
+            i++;
+        } while (P != L.First);
+    }
+}
 ```
 
 ### 3.3 main.cpp
 ```cpp
+#include "circularlist.h"
+#include <iostream>
+using namespace std;
 
+// fungsi bantuan untuk buat data mahasiswa
+address createData(string nama, string nim, char jk, float ipk) {
+    infotype mhs;
+    mhs.Nama = nama;
+    mhs.Nim = nim;
+    mhs.Jenis_Kelamin = jk;
+    mhs.IPK = ipk;
+    return alokasi(mhs);
+}
+
+int main() {
+     List L;
+    address P1 = nil;
+    address P2 = nil;
+    infotype x; // variabel bantuan untuk searching (findElm)
+
+    CreateList(L);
+
+    cout << "coba insert first, last, dan after" << endl;
+
+    // 1. Insert First (Danu)
+    P1 = createData("Danu", "04", 'l', 4.0);
+    insertFirst(L, P1);
+
+    // 2. Insert Last (Fahmi)
+    P1 = createData("Fahmi", "06", 'l', 3.45);
+    insertLast(L, P1);
+
+    // 3. Insert Last (Bobi)
+    P1 = createData("Bobi", "02", 'l', 3.71);
+    insertLast(L, P1); 
+
+    // 4. Insert First (Ali)
+    P1 = createData("Ali", "01", 'l', 3.3);
+    insertFirst(L, P1);
+
+    // 5. Insert First (Gita)
+    P1 = createData("Gita", "07", 'p', 3.75);
+    insertLast(L, P1);
+
+    // --- INSERT AFTER ---
+
+    // 6. Insert Cindi (03) setelah Gita (07)
+    x.Nim = "07";
+    P1 = findElm(L, x);
+    P2 = createData("Cindi", "03", 'p', 3.5);
+    insertAfter(L, P1, P2);
+
+    // 7. Insert Hilmi (08) setelah Bobi (02)
+    x.Nim = "02";
+    P1 = findElm(L, x);
+    P2 = createData("Hilmi", "08", 'p', 3.3);
+    insertAfter(L, P1, P2);
+
+    // 8. Insert Eli (05) setelah Danu (04)
+    x.Nim = "04";
+    P1 = findElm(L, x);
+    P2 = createData("Eli", "05", 'p', 3.4);
+    insertAfter(L, P1, P2);
+
+    printInfo(L);
+
+    return 0;
+}
 ```
 
 
 #### Output:
 
-[PENEJELASAN CODE]
+<img width="1700" height="877" alt="image" src="https://github.com/user-attachments/assets/d0ddff5a-64e1-4487-bf26-32aaa1a999b9" />
+
+Program ini mengimplementasikan circular linked list dimana elemen akhir akan menyambung kembali dengan elemen awal pada list. Program ini juga tentang bagaimana kita membuat ADT MLL dengan tema mahasiswa.
+
+<ol>
+  <li>
+    File <code>circularlist.h</code>. File ini mendefinisikan struktur data Circular Single Linked List. Berbeda dengan list linear biasa, elemen akhir atau last pada list ini memiliki pointer next yang akan kembali menunjuk ke elemen pertama atau first, sehingga tidak ada nilai null pada next. Didalamnya juga mendefinisikan struktur data Mahasiswa yang berisi Nama, Nim, Jenis Kelamin, IPK yang digunakan sebagai tipe data info. File ini juga mendeklrasikan prototype fungsi primitif manajemen list, operasi insert list, operasi pencarian list, operasi cetak list.
+  </li>
+
+  <li>
+    File <code>circularlist.cpp</code>. Ini berisi seluruh logika pada implementasi fungsi ataupun prosedur yang sudah dideklarasikan pada file .h. Seperti Operasi insert logikanya mungkin akan lebih komplek dibanding SLL karena memerlukan traversal atau penelusuran hingga elemen akhir untuk memperbarui pointer nextnya agar tetep menunjuk ke elemen pertama. Operasi delete ini meskipun kita mendeklarasikan pada file .h dan menerapkan logikanya pada file circular.cpp tapi operasi delete ini tidak dipakai karena sesuai ketentuan soal, namun penghapusan elemen memerlukan penyesuaian pointer elemen terakhir jika elemen pertama dihapus. Operasi print digunakan untuk menampilkan list yang sudah di buat.
+  </li>
+
+  <li>
+    File <code>main.cpp</code>. File ini akan menguji keseluruhan program yang sudah kita buat pada 2 file sebelumnya, contohnya akan melakukan insertFirst(Ali.Danu) untuk tambah di awal, InsertLast(Fahmi, Bobi, Gita) untuk tambah di akhir, dan insertAfter(Cindi, Helmi, Eli) yang didahului oleh fungsi findElm untuk mencari lokasi penyisipan berdasarkan NIM mereka. Hasil akhirnya ditampilkan menggunakan printInfo untuk memverifikasi bahwa data tersusun sesuai logika Circular List, di mana urutan elemen saling terhubung tanpa putus.
+  </li>
+</ol>
+
 
 #### Full code screenshot:
 
-#### Code bstree.h
+#### Code circularlist.h
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7dc58913-a50b-4e9b-9c52-329269f897dd" />
 
 
-#### code bstree.cpp
+#### code circularlist.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/24819d19-2841-49b1-a42e-e0006ede5cfb" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bbdf3016-aa14-45fc-a839-c73d821623d8" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6cadc71d-d325-4f94-9a6e-f9f40e3a6fdb" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/78e8de4f-bc0c-4fc4-86b2-549ac1d83b6e" />
 
 
 #### code main.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d5c449b6-254c-4e9c-a3fc-b8718c6ff6ae" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/227473cf-610b-4ffc-b602-d68a3f58a135" />
+
 
 
 ## Kesimpulan
-
+Berdasarkan praktikum yang dilaksanakan pada hari ini, Saya mempelajari materi baru terkait pengembangan struktur data linked list yang lebih kompleks daripada linked list sebelumnya yang sudah saya pelajari, yaitu Multi Linked LIst dan juga Circular Linked List (List melingkar atau bundar atau bulat bentuknya). Pada Multi Linked List saya memahami juga terkait representasi data hierarkis one to many yang dimana setiap node atau elemen induk bisa memiliki linked list anaknya sendiri atau jika tidak ada ya tidak masalah. Selanjutnya Circular Linked List dimana sebuah pointer elemen terakhir akan kembali menunjuk ke elemen pertama sehingga membentuk siklus bulat atau tertutup tanpa adanya nilai NULL. Melalui latihan ini saya mendapat pemahaman baru dan juga bentuk code code serta visualisasi yang jelas terkait dengan materi modul 13 kali ini.
 
 
 
