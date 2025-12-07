@@ -1224,7 +1224,7 @@ Program ini dibuat dengan mengimplementasikan multi link list, kita disuruh untu
 
 
 
-### 2. Soal ketiga
+### 3. Soal ketiga
 
 <img width="884" height="699" alt="image" src="https://github.com/user-attachments/assets/ec4224fe-45fd-4f56-bc1b-5256dd56fff7" />
 
