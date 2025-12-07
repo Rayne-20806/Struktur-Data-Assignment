@@ -742,25 +742,508 @@ int main() {
     return 0;
 }
 ```
-[PENJELASAN CODE]
+
+<ol>
+  <li>
+    File <code>mll.h</code>. File ini berisi Abstract Data Type atau ADT Multi Link List. Struktur data ini terdiri dari dua jenis node atau elemen yaitu nodeParent untuk kategori makanan dan nodeChild untuk data makanan. Keunikan dari struktur multi link list ialah setiap nodeParent bisa memiliki komponen listAnak didalamnya yang memungkinkan bahwa satu kategori makanan bisa memiliki banyak menu. Pada file ini juga mendeklarasikan fungsi atau prosedur primitif seperti manajemen memori(alokasi dan dealokasi), manajemen list, operasi list seperti insert, delete, find dan juga update, serta pencetakan list
+  </li>
+
+  <li>
+    File <code>mll.cpp</code>. File ini berisi semua implementasi logika dari seluruh fungsi atau prosedur yang sudah dideklarasikan pada file .h.
+  </li>
+
+  <li>
+    File <code>main.cpp</code>. File ini merupakan program utama dalam menjalankan file ADT yang sudah kita buat. Program ini akan melakukan inisialisasi list, membuat 3 kategori makanan (Makanan Berat, Minuman), dan memasukkan beberapa menu ke dalam kategori yang sesuai. Selanjutnya program akan menguji validitas fungsi update (mengubah nama/harga menu), find/pencarian, dan delete yang digunakan untuk menghapus menu spesifik dan menghapus kategori beserta seluruh isinya. Program ini juga akan menampilkan hasil MLL pada bagian akhir.
+  </li>
+</ol>
 
 
 ## Unguided 
 
-### 1. Soal Pertama
+### 2. Soal dua
+<img width="512" height="56" alt="image" src="https://github.com/user-attachments/assets/26675828-1356-4e95-91d4-af5dc5224ee9" />
 
 
-### 1.1 mll.h
+### 2.1 multilist.h
+```h
+#ifndef MULTILIST_H_INCLUDED
+#define MULTILIST_H_INCLUDED
+
+#include <iostream>
+using namespace std;
+#define Nil NULL
+
+// definisi tipe data dan ADT multilist
+typedef int infotypeinduk;
+typedef int infotypeanak;
+typedef struct elemen_list_induk *address;
+typedef struct elemen_list_anak *address_anak;
+
+// struktu Elemen untuk anak
+struct elemen_list_anak {
+    infotypeanak info;
+    address_anak next;
+    address_anak prev;
+};
+struct listanak {
+    address_anak first;
+    address_anak last;
+};
+
+// struktur Elemen untuk induk
+struct elemen_list_induk {
+    infotypeinduk info;
+    listanak lanak; // list anak ada di induknya
+    address next;
+    address prev;
+};
+struct listinduk {
+    address first;
+    address last;
+};
+
+//deklarasikan fungsi atau prosedur primiif
+
+// Cek Kosong
+bool ListEmpty(listinduk L);
+bool ListEmptyAnak(listanak L);
+
+// Create List
+void CreateList(listinduk &L);
+void CreateListAnak(listanak &L);
+
+// Manajemen Memori
+address alokasi(infotypeinduk P);
+address_anak alokasiAnak(infotypeanak P);
+void dealokasi(address P);
+void dealokasiAnak(address_anak P);
+
+// Pencarian
+address findElm(listinduk L, infotypeinduk X);
+address_anak findElmAnak(listanak Lanak, infotypeanak X); // Saya rapikan namanya
+
+// Penambahan Elemen Induk
+void insertFirst(listinduk &L, address P);
+void insertAfter(listinduk &L, address P, address Prec);
+void insertLast(listinduk &L, address P);
+
+// Penambahan Elemen Anak
+void insertFirstAnak(listanak &L, address_anak P);
+void insertAfterAnak(listanak &L, address_anak P, address_anak Prec);
+void insertLastAnak(listanak &L, address_anak P);
+
+// Penghapusan Elemen Induk
+void delFirst(listinduk &L, address &P);
+void delLast(listinduk &L, address &P);
+void delAfter(listinduk &L, address &P, address Prec);
+void delP(listinduk &L, infotypeinduk X); // Hapus berdasarkan nilai
+
+// Penghapusan Elemen Anak
+void delFirstAnak(listanak &L, address_anak &P);
+void delLastAnak(listanak &L, address_anak &P);
+void delAfterAnak(listanak &L, address_anak &P, address_anak Prec);
+void delPAnak(listanak &L, infotypeanak X); // Hapus berdasarkan nilai
+
+// Cetak
+void printInfo(listinduk L);
+void printInfoAnak(listanak Lanak);
+
+#endif
+```
+
+### 2.2 multilist.cpp
+```cpp
+#include "multilist.h"
+#include <iostream>
+using namespace std;
+
+// penerapan fungsi atau prosedur
+
+
+// CEK KOSONG
+bool ListEmpty(listinduk L) {
+    return L.first == Nil;
+}
+
+bool ListEmptyAnak(listanak L) {
+    return L.first == Nil;
+}
+
+// CREATE LIST 
+void CreateList(listinduk &L) {
+    L.first = Nil;
+    L.last = Nil;
+}
+
+void CreateListAnak(listanak &L) {
+    L.first = Nil;
+    L.last = Nil;
+}
+
+// --- ALOKASI ---
+address alokasi(infotypeinduk P) {
+    address newNode = new elemen_list_induk;
+    newNode->info = P;
+    newNode->next = Nil;
+    newNode->prev = Nil;
+    CreateListAnak(newNode->lanak); // Inisialisasi list anak di dalamnya
+    return newNode;
+}
+
+address_anak alokasiAnak(infotypeanak P) {
+    address_anak newNode = new elemen_list_anak;
+    newNode->info = P;
+    newNode->next = Nil;
+    newNode->prev = Nil;
+    return newNode;
+}
+
+void dealokasi(address P) {
+    delete P;
+}
+
+void dealokasiAnak(address_anak P) {
+    delete P;
+}
+
+// --- PENCARIAN ---
+address findElm(listinduk L, infotypeinduk X) {
+    address P = L.first;
+    while (P != Nil) {
+        if (P->info == X) return P;
+        P = P->next;
+    }
+    return Nil;
+}
+
+address_anak findElmAnak(listanak Lanak, infotypeanak X) {
+    address_anak P = Lanak.first;
+    while (P != Nil) {
+        if (P->info == X) return P;
+        P = P->next;
+    }
+    return Nil;
+}
+
+// --- INSERT INDUK ---
+void insertFirst(listinduk &L, address P) {
+    if (ListEmpty(L)) {
+        L.first = P;
+        L.last = P;
+    } else {
+        P->next = L.first;
+        L.first->prev = P;
+        L.first = P;
+    }
+}
+
+void insertLast(listinduk &L, address P) {
+    if (ListEmpty(L)) {
+        L.first = P;
+        L.last = P;
+    } else {
+        P->prev = L.last;
+        L.last->next = P;
+        L.last = P;
+    }
+}
+
+void insertAfter(listinduk &L, address P, address Prec) {
+    if (Prec != Nil) {
+        if (Prec == L.last) {
+            insertLast(L, P);
+        } else {
+            P->next = Prec->next;
+            P->prev = Prec;
+            Prec->next->prev = P;
+            Prec->next = P;
+        }
+    }
+}
+
+// --- INSERT ANAK ---
+void insertFirstAnak(listanak &L, address_anak P) {
+    if (ListEmptyAnak(L)) {
+        L.first = P;
+        L.last = P;
+    } else {
+        P->next = L.first;
+        L.first->prev = P;
+        L.first = P;
+    }
+}
+
+void insertLastAnak(listanak &L, address_anak P) {
+    if (ListEmptyAnak(L)) {
+        L.first = P;
+        L.last = P;
+    } else {
+        P->prev = L.last;
+        L.last->next = P;
+        L.last = P;
+    }
+}
+
+void insertAfterAnak(listanak &L, address_anak P, address_anak Prec) {
+    if (Prec != Nil) {
+        if (Prec == L.last) {
+            insertLastAnak(L, P);
+        } else {
+            P->next = Prec->next;
+            P->prev = Prec;
+            Prec->next->prev = P;
+            Prec->next = P;
+        }
+    }
+}
+
+// --- DELETE INDUK ---
+void delFirst(listinduk &L, address &P) {
+    if (!ListEmpty(L)) {
+        P = L.first;
+        if (L.first == L.last) {
+            L.first = Nil;
+            L.last = Nil;
+        } else {
+            L.first = L.first->next;
+            L.first->prev = Nil;
+            P->next = Nil;
+        }
+    }
+}
+
+void delLast(listinduk &L, address &P) {
+    if (!ListEmpty(L)) {
+        P = L.last;
+        if (L.first == L.last) {
+            L.first = Nil;
+            L.last = Nil;
+        } else {
+            L.last = L.last->prev;
+            L.last->next = Nil;
+            P->prev = Nil;
+        }
+    }
+}
+
+void delAfter(listinduk &L, address &P, address Prec) {
+    if (Prec != Nil && Prec->next != Nil) {
+        if (Prec->next == L.last) {
+            delLast(L, P);
+        } else {
+            P = Prec->next;
+            Prec->next = P->next;
+            P->next->prev = Prec;
+            P->next = Nil;
+            P->prev = Nil;
+        }
+    }
+}
+
+void delP(listinduk &L, infotypeinduk X) {
+    address P = findElm(L, X);
+    if (P != Nil) {
+        address temp;
+        if (P == L.first) delFirst(L, temp);
+        else if (P == L.last) delLast(L, temp);
+        else delAfter(L, temp, P->prev);
+        dealokasi(temp);
+    }
+}
+
+// --- DELETE ANAK ---
+void delFirstAnak(listanak &L, address_anak &P) {
+    if (!ListEmptyAnak(L)) {
+        P = L.first;
+        if (L.first == L.last) {
+            L.first = Nil;
+            L.last = Nil;
+        } else {
+            L.first = L.first->next;
+            L.first->prev = Nil;
+            P->next = Nil;
+        }
+    }
+}
+
+void delLastAnak(listanak &L, address_anak &P) {
+    if (!ListEmptyAnak(L)) {
+        P = L.last;
+        if (L.first == L.last) {
+            L.first = Nil;
+            L.last = Nil;
+        } else {
+            L.last = L.last->prev;
+            L.last->next = Nil;
+            P->prev = Nil;
+        }
+    }
+}
+
+void delAfterAnak(listanak &L, address_anak &P, address_anak Prec) {
+    if (Prec != Nil && Prec->next != Nil) {
+        if (Prec->next == L.last) {
+            delLastAnak(L, P);
+        } else {
+            P = Prec->next;
+            Prec->next = P->next;
+            P->next->prev = Prec;
+            P->next = Nil;
+            P->prev = Nil;
+        }
+    }
+}
+
+void delPAnak(listanak &L, infotypeanak X) {
+    address_anak P = findElmAnak(L, X);
+    if (P != Nil) {
+        address_anak temp;
+        if (P == L.first) delFirstAnak(L, temp);
+        else if (P == L.last) delLastAnak(L, temp);
+        else delAfterAnak(L, temp, P->prev);
+        dealokasiAnak(temp);
+    }
+}
+
+// --- CETAK ---
+void printInfo(listinduk L) {
+    cout << "\n[ISI MULTI LIST]" << endl;
+    if (ListEmpty(L)) {
+        cout << "List Kosong." << endl;
+    } else {
+        address P = L.first;
+        while (P != Nil) {
+            cout << "Induk: " << P->info << endl;
+            printInfoAnak(P->lanak); // Cetak anaknya
+            P = P->next;
+            cout << "-----------------" << endl;
+        }
+    }
+}
+
+void printInfoAnak(listanak Lanak) {
+    if (ListEmptyAnak(Lanak)) {
+        cout << "   (Tidak ada anak)" << endl;
+    } else {
+        address_anak P = Lanak.first;
+        while (P != Nil) {
+            cout << "   -> Anak: " << P->info << endl;
+            P = P->next;
+        }
+    }
+}
+```
+
+### 2.3 main.cpp
+```cpp
+#include "multilist.h"
+#include <iostream>
+using namespace std;
+
+int main() {
+    // 1. Buat List Induk
+    listinduk L;
+    CreateList(L);
+    cout << "=== PROGRAM MULTI LIST ANGKA ===" << endl;
+
+    // 2. Insert Induk (1, 2, 3)
+    address Induk1 = alokasi(1);
+    insertFirst(L, Induk1);
+    
+    address Induk2 = alokasi(2);
+    insertLast(L, Induk2);
+    
+    address Induk3 = alokasi(3);
+    insertLast(L, Induk3);
+
+    // 3. Insert Anak ke Induk 1 (Anak: 10, 20)
+    insertLastAnak(Induk1->lanak, alokasiAnak(10));
+    insertLastAnak(Induk1->lanak, alokasiAnak(20));
+
+    // 4. Insert Anak ke Induk 2 (Anak: 50)
+    insertLastAnak(Induk2->lanak, alokasiAnak(50));
+
+    // 5. Insert Anak ke Induk 3 (Anak: 99, 100)
+    insertLastAnak(Induk3->lanak, alokasiAnak(99));
+    insertLastAnak(Induk3->lanak, alokasiAnak(100));
+
+    // 6. Cetak
+    printInfo(L);
+
+    // 7. Hapus Anak 50 dari Induk 2
+    cout << "\n>> Menghapus Anak 50 dari Induk 2..." << endl;
+    delPAnak(Induk2->lanak, 50);
+    printInfo(L);
+
+    return 0;
+}
+```
+
+
+#### Output:
+
+<img width="1672" height="737" alt="image" src="https://github.com/user-attachments/assets/7d28af95-aeef-41f1-9aec-ba15a6b39120" />
+
+Program ini dibuat dengan mengimplementasikan multi link list, kita disuruh untuk membuat program 46 dari halaman 5-8.
+<ol>
+  <li>
+    File <code>multilist.h</code>. File ini berisi implementasi ADT Multi link list yang terdiri dari dua struktur utama yaitu listinduk dan listanak. Karena ini Multi Link List maka setiap elemen listInduk memiliki komponen khusus lanak yang merupakan sebuah listanak. Sehingga 1 elemen induk bisa memiliki banyak elemen anak. Program ini mengimplementasikan juga Doubly Linked list karena memiliki prev. File ini juga mendeklarasikan banyak fungsi dan prosedur primitif seperti manajemen list, manajemen memory, operasi insert, operasi delete, pencarian elemen, dan cetak elemen.
+  </li>
+
+  <li>
+    File <code>multilist.cpp</code>. File ini berisi dari semua implementasi dari fungsi atau prosedur yang sudah dideklarasikan pada file .h. Manajemen memori seperti alokasi untuk induk secara otomatis memanggil CreateListAnak untuk menginisialisasi list anaknya agar bisa digunakan. Operasi list terdapat dua yaitu fungsi insert dan delete (satu set untuk induk, satu set untuk anak). Logika insert dan delete masih sama seperti doubly link list dengan mengubah pointer next dan prev. Operasi Cetak,  fungsi printInfo menggunakan nested loop (looping bersarang) di mana loop luar menelusuri setiap elemen induk, dan di dalamnya dipanggil printInfoAnak untuk menelusuri dan mencetak seluruh elemen anak yang dimiliki induk tersebut.
+  </li>
+  <li>
+    File <code>main.cpp</code>. File ini merupakan program utama untuk menguji dari ADT. program ini membuat list induk kosong.
+  </li>
+
+</ol>
+
+#### Full code screenshot:
+
+#### Code multilist.h
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a369132f-932c-49cb-b63c-638e74320961" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/84140b0c-197b-41c4-9df4-b4fe3df675f9" />
+
+
+
+#### code multilist.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6c7e481a-d2a9-4da2-874e-5ce125c5dec6" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/da69d340-138a-4ce5-a0ec-1f09d9a393ee" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/002b60c4-8543-44e1-ac69-c0da9d5918f7" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/75aacfc2-a601-4362-a14f-16f334b7cf42" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/412fcf6c-7b21-4198-a30e-d1d16f1c17b0" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d9f988f7-93af-4d21-8b6d-1a351e443e05" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/27e74f45-50be-4502-ab94-00b633cdc255" />
+
+
+
+#### code main.cpp
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/07b9ed00-865d-4996-a8da-b6decf637c79" />
+
+
+
+### 2. Soal ketiga
+
+<img width="884" height="699" alt="image" src="https://github.com/user-attachments/assets/ec4224fe-45fd-4f56-bc1b-5256dd56fff7" />
+
+<img width="884" height="791" alt="image" src="https://github.com/user-attachments/assets/6d323344-edbc-4376-945c-93b0c7e30310" />
+
+<img width="889" height="623" alt="image" src="https://github.com/user-attachments/assets/bede812e-747a-49d2-b1f5-deccbd7e3518" />
+
+
+### 3.1 mll.h
 ```h
 
 ```
 
-### 1.2 mll.cpp
+### 3.2 mll.cpp
 ```cpp
 
 ```
 
-### 1.3 main.cpp
+### 3.3 main.cpp
 ```cpp
 
 ```
