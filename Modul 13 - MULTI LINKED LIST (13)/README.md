@@ -5,7 +5,9 @@
 ## Teori Multi Linked List
 Multi Linked List atau MLL merupakan sekumpulan list yang berbeda yang memiliki suatu keterhubungan satu sama lain. Tiap elemen dalam multi link list dapat membentuk list sendiri. Biasanya ada yang sebagai list induk dan list anak. Beriku contoh gambar multi link list agar lebih jelas.
 
-<img width="574" height="395" alt="image" src="https://github.com/user-attachments/assets/0bb969c7-e828-459b-9aaf-50bb9035350c" />
+<img width="833" height="593" alt="image" src="https://github.com/user-attachments/assets/6d6a5cc1-d672-4fc1-9c1a-20849273f2bc" />
+
+
 
 Dalam contoh diatas merupakan implementasi multi linked list yang dimana terdapat dua buah list yaitu list pegawai sebagai parent list dan list anak sebagai child.
 
@@ -15,9 +17,9 @@ Pada materi kali ini, selain kita membahas apa itu multi linked list beserta con
   <li>
     Insert Anak. Dalam penambahan elemen anak atau child harus diketahui terlebih dahulu elemen induknya
   </li>
-  
-  <img width="605" height="391" alt="image" src="https://github.com/user-attachments/assets/52acd50a-23ee-424e-ad3f-454173010425" />
-  <img width="539" height="392" alt="image" src="https://github.com/user-attachments/assets/67450bd4-c007-4b28-95c4-3b9e6d47fd24" />
+
+  <img width="675" height="792" alt="image" src="https://github.com/user-attachments/assets/9cea470c-b1a8-4a90-9d35-a051967a6c35" />
+
 
   <li>
     Insert induk atau parent. Untuk insert elemen induk sama dengan konsep pada Single Linked List, Doubly linked list, dan juga Circuler Linked List
